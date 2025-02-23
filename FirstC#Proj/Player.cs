@@ -3,43 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace FirstC_Proj
 {
     public class Player
     {
-        public static int countOfPlayers = 0;
-        public const float P1 = 3.14f;
-        public readonly int id = 0;
+        public string Name { get; set; }
 
-        private float speed = 10f;
-        protected int health = 100;
-        internal protected string name = "Player1";
-
-        internal protected void Print()
+        private int score;
+        public int Score
         {
-            Console.WriteLine($"{name} {health} {speed}");
+            get { return score; }
+            set
+            {
+                score = value;
+                CheckLevelUp();
+            }
+        }
+        public int Level { get; private set; }
+
+        public Player(string name)
+        {
+            Name = name;
+            Level = 1;
         }
 
-        static Player()
+        private void CheckLevelUp()
         {
-            countOfPlayers = 0;
-        }
-
-        public Player() : this(1, 10f, 150, "Player1")
-        { }
-
-        public Player(int id, float speed, int health, string name)
-        {
-            this.id = id;
-            this.speed = speed;
-            this.health = health;
-            this.name = name;
-        }
-
-        public Player(int id)
-        {
-            this.id = id;
+            if (score >= 10)
+            {
+                Level++;
+                Console.WriteLine($"{Name} reached the level {Level}!");
+                score = 0;
+            }
         }
     }
 }
