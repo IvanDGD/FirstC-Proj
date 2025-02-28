@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FirstC_Proj
 {
@@ -8,552 +9,172 @@ namespace FirstC_Proj
     {
         static void Main(string[] args)
         {
-            #region Task1
-            //float[] A = new float[5];
 
-            //int rows = 3;
-            //int cols = 4;
+            #region Task 1
 
-            //float[,] B = new float[rows, cols];
+            //SquarePrint(5, 9, "*");
 
-            //Random rnd = new Random();
-
-            //Console.WriteLine("Enter num for A array:");
-            //InitArray(A);
-            //InitMultiArray(B, rows, cols, rnd);
-
-            //Console.WriteLine("Array A:");
-            //PrintArray(A);
-            //Console.WriteLine("Array B:");
-            //PrintMultiArray(B, rows, cols);
-
-            //float max = FindMax(A, B, rows, cols);
-            //float min = FindMin(A, B, rows, cols);
-            //float totalSum = CalculateTotalSum(A, B, rows, cols);
-            //float totalProduct = CalculateTotalProduct(A, B, rows, cols);
-            //float evenSumA = CalculateEvenSumA(A);
-            //float oddColumnSumB = CalculateOddColumnSumB(B, rows, cols);
-
-            //Console.WriteLine($"Max Element: {max}");
-            //Console.WriteLine($"Min Element: {min}");
-            //Console.WriteLine($"Total Sum: {totalSum}");
-            //Console.WriteLine($"Total Product: {totalProduct}");
-            //Console.WriteLine($"Sum of Even Elements in A: {evenSumA}");
-            //Console.WriteLine($"Sum of Odd Columns in B: {oddColumnSumB}");
             #endregion
 
-            #region Task2
+            #region Task 2
 
-            //int rows = 5;
-            //int cols = 5;
-
-            //int[,] array = new int[rows, cols];
-
-            //Random rnd = new Random();
-
-            //InitMultiArray(array, rows, cols, rnd);
-
-            //PrintMultiArray(array, rows, cols);
-
-            //int minValue = array[0, 0];
-            //int maxValue = array[0, 0];
-            //int minRow = 0, minCol = 0;
-            //int maxRow = 0, maxCol = 0;
-
-            //for (int i = 0; i < rows; i++)
+            //if (IsPalindrome())
             //{
-            //    for (int j = 0; j < cols; j++)
-            //    {
-            //        if (array[i, j] < minValue)
-            //        {
-            //            minValue = array[i, j];
-            //            minRow = i;
-            //            minCol = j;
-            //        }
-            //        if (array[i, j] > maxValue)
-            //        {
-            //            maxValue = array[i, j];
-            //            maxRow = i;
-            //            maxCol = j;
-            //        }
-            //    }
+            //    Console.WriteLine("Your number is polindrome");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Your number isn't polindrome");
             //}
 
-            //int sum = 0;
-            //bool isBetween = false;
+            #endregion
 
-            //for (int i = 0; i < rows; i++)
+            #region Task 3
+
+            //int size = 7;
+            //int[] array = new int[]{ 1, 2, 6, -1, 88, 7, 6, };
+
+            //int[] arrayForFilter = {6, 88, 7 };
+
+            //int[] filtredArray = FilterArray(array, arrayForFilter, size);
+
+            //for(int i = 0; i < filtredArray.Length; i++)
             //{
-            //    for (int j = 0; j < cols; j++)
-            //    {
-            //        if ((i == minRow && j == minCol) || (i == maxRow && j == maxCol))
-            //        {
-            //            if (isBetween)
-            //            {
-            //                break;
-            //            }
-            //            isBetween = true;
-            //        }
-
-            //        if (isBetween)
-            //        {
-            //            sum += array[i, j];
-            //        }
-            //    }
-            //    if (isBetween && (i == maxRow || i == minRow))
-            //    {
-            //        break;
-            //    }
+            //    Console.Write($"{filtredArray[i]} ");
             //}
 
-            //Console.WriteLine($"Сума елементів між мінімальним і максимальним: {sum}");
+            #endregion
 
+            #region Task 4
+
+            //Website website = new Website("republiquedesmangues", "http://www.republiquedesmangues.fr", "Go to the site, it is very important", "217.160.0.38");
+
+            //Website website2 = new Website();
+
+            //website2.InputData();
+
+            //website.DisplayData();
+            //website2.DisplayData();
 
             #endregion
 
-            #region Task3
+            #region Task 5
 
-            //Console.Write("Enter string: ");
-            //string input = Console.ReadLine();
+            //Magazine magazine = new Magazine();
 
-            //Console.Write("Enter shift: ");
-            //int shift = int.Parse(Console.ReadLine());
-
-            //string encrypted = Encrypt(input, shift);
-            //Console.WriteLine("Encrypted: " + encrypted);
-
-            //string decrypted = Decrypt(encrypted, shift);
-            //Console.WriteLine("Decrypted: " + decrypted);
+            //magazine.InputData();
+            //magazine.DisplayData();
 
             #endregion
 
-            #region Task4
+            #region Task 6
 
-            //int rows = 3;
-            //int cols = 4;
-            //int[,] A = new int[rows, cols];
+            //Shop shop = new Shop();
 
-            //int[,] B = new int[rows, cols];
-
-            //Random rnd = new Random();
-
-            //Console.WriteLine("Array A:");
-            //InitMultiArrayLowerRange(A, rows, cols, rnd);
-            //PrintMultiArray(A, rows, cols);
-
-            //Console.WriteLine("Array B:");
-            //InitMultiArrayLowerRange(B, rows, cols, rnd);
-            //PrintMultiArray(B, rows, cols);
-
-            //Console.Write("Enter produt value: ");
-            //int value = int.Parse(Console.ReadLine());
-
-            //MatrixValueProduct(B, rows, cols, value);
-            //Console.WriteLine("Array B:");
-            //PrintMultiArray(B, rows, cols);
-
-            //int[,] C = MatrixPlus(A, B, rows, cols);
-            //Console.WriteLine("Array C:");
-            //PrintMultiArray(C, rows, cols);
-
-            //int[,] D = MatrixProduct(A, B, rows, cols);
-            //Console.WriteLine("Array D:");
-            //PrintMultiArray(D, rows, cols);
+            //shop.InputData();
+            //shop.DisplayData();
 
             #endregion
 
-            #region Task5
+            #region Task 7
 
-            //Console.Write("Enter arefmetical (+ or -): ");
-            //string input = Console.ReadLine();
+            //Vessel vessel1 = new Vessel(100);
+            //Vessel vessel2 = new Vessel(200, "Steel");
+            //Vessel vessel3 = new Vessel(300, "Aluminum", true);
 
-            //Console.Write("Enter first num: ");
-            //int value1 = int.Parse(Console.ReadLine());
+            //vessel1.PrintInfo();
+            //vessel2.PrintInfo();
+            //vessel3.PrintInfo();
 
-            //Console.Write("Enter second num: ");
-            //int value2 = int.Parse(Console.ReadLine());
 
-            //int result = EvaluateExpression(input, value1, value2);
-            //Console.WriteLine("Result: " + result);
+            //vessel1.Fill(50);
+            //vessel1.Fill(60);
+            //vessel1.Empty(30);
+            //vessel1.Empty(90);
 
-            #endregion
+            //vessel2.Fill(150);
+            //vessel2.Empty(100);
 
-            #region Task6
-
-            //Console.Write("Enter string: ");
-            //string input = Console.ReadLine();
-
-            //string capitalizedText = CapitalizeSentences(input);
-            //Console.WriteLine("Result: " + capitalizedText);
-
-            #endregion
-
-            #region Task7
-
-            //Console.Write("Enter string: ");
-            //string input = Console.ReadLine();
-
-            //string filteredText = MuteWords(input);
-
-            //Console.WriteLine("Result:");
-            //Console.WriteLine(filteredText);
-
-            #endregion
-
-            #region Task8
-
-            //Console.Write("Enter string: ");
-            //string input = Console.ReadLine();
-
-            //Console.Write("Enter shift: ");
-            //int shift = int.Parse(Console.ReadLine());
-
-            //string encrypted = Encrypt(input, shift);
-            //Console.WriteLine("Encrypted: " + encrypted);
-
-            #endregion
-
-            #region Task9
-
-            Console.Write("Enter rows: ");
-            int rows = int.Parse(Console.ReadLine());
-
-            Console.Write("Enter cols: ");
-            int cols = int.Parse(Console.ReadLine());
-
-            Console.Write("Enter value: ");
-            int value = int.Parse(Console.ReadLine());
-
-            GenerateAndMultiplyArray(rows, cols, value);
+            //vessel3.Empty(100);
+            //vessel3.Fill(50);
 
             #endregion
 
         }
 
-
-        static void GenerateAndMultiplyArray(int rows, int cols, int value)
+        static int[] FilterArray(int[] array, int[] arrayForFilter, int size)
         {
-            int[,] matrix = new int[rows, cols];
-            Random rnd = new Random();
+            int newSize = size;
 
-            InitMultiArray(matrix, rows, cols, rnd);
-
-            MatrixValueProduct(matrix, rows, cols, value);
-
-            PrintMultiArray(matrix, rows, cols);
-        }
-
-        static string MuteWords(string text)
-        {
-            string wordForMute = "die";
-            string replacement = "***";
-            int count = 0;
-
-            int index = 0;
-            while (true)
+            for (int i = 0; i < newSize; i++)
             {
-                index = text.IndexOf(wordForMute, index, StringComparison.OrdinalIgnoreCase);
-
-                if (index == -1)
-                    break;
-
-                bool isWholeWord = true;
-
-                if (index > 0 && char.IsLetterOrDigit(text[index - 1]))
-                    isWholeWord = false;
-
-                if (index + wordForMute.Length < text.Length && char.IsLetterOrDigit(text[index + wordForMute.Length]))
-                    isWholeWord = false;
-
-                if (isWholeWord)
+                for (int j = 0; j < arrayForFilter.Length; j++)
                 {
-                    text = text.Remove(index, wordForMute.Length).Insert(index, replacement);
-                    index += replacement.Length;
-                    count++;
-                }
-                else
-                {
-                    index += wordForMute.Length;
-                }
-            }
-
-            Console.WriteLine($"Statistic: {count} replaced words {wordForMute}");
-
-            return text;
-        }
-
-        static string CapitalizeSentences(string text)
-        {
-            StringBuilder result = new StringBuilder(text.Length);
-            bool capitalizeNext = true;
-
-            foreach (char ch in text)
-            {
-                if (capitalizeNext && char.IsLetter(ch))
-                {
-                    result.Append(char.ToUpper(ch));
-                    capitalizeNext = false;
-                }
-                else
-                {
-                    result.Append(ch);
-                }
-
-                if (ch == '.' || ch == '!' || ch == '?')
-                {
-                    capitalizeNext = true;
-                }
-            }
-
-            return result.ToString();
-        }
-
-        static int EvaluateExpression(string expression, int value1, int value2)
-        {
-            int result = 0;
-            
-            char ch = expression[0];
-
-            if (!char.IsDigit(ch) && !char.IsWhiteSpace(ch) || 0 == expression.Length - 1)
-            {
-                if (ch == '+')
-                {
-                    result = value1 + value2;
-                }
-                else if (ch == '-')
-                {
-                    result = value1 - value2;
-                }
-            }
-            return result;
-        }
-
-        static int[,] MatrixProduct(int[,] arr, int[,] arr2, int rows, int cols)
-        {
-            int[,] arr3 = new int[rows, cols];
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    arr3[i, j] = arr[i, j] * arr2[i, j];
-                }
-            }
-
-            return arr3;
-
-        }
-
-        static int[,] MatrixPlus(int[,] arr, int[,] arr2, int rows, int cols)
-        {
-            int[,] arr3 = new int[rows, cols];
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    arr3[i, j] = arr[i, j] + arr2[i, j];
-                }
-            }
-
-            return arr3;
-
-        }
-
-        static void MatrixValueProduct(int[,] arr, int rows, int cols, int value)
-        {
-            {
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < cols; j++)
+                    if (array[i] == arrayForFilter[j])
                     {
-                        arr[i, j] *= value;
+                        newSize--;
+
+                        for (int k = i; k < newSize; k++)
+                        {
+                            array[k] = array[k + 1];
+                        }
+
+                        i--;
+                        break;
                     }
                 }
             }
+
+            int[] result = new int[newSize];
+            for (int i = 0; i < newSize; i++)
+            {
+                result[i] = array[i];
+            }
+
+            return result;
         }
 
-        static string Encrypt(string text, int shift)
+        static bool IsPalindrome()
         {
-            char[] buffer = text.ToCharArray();
+            Console.Write("Enter number: ");
+            string str = Console.ReadLine();
 
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0, j = str.Length - 1; i < j; i++, j--)
             {
-                char letter = buffer[i];
-                if (char.IsLetter(letter))
+                if (str[i] != str[j])
                 {
-                    char baseChar = char.IsUpper(letter) ? 'A' : 'a';
-                    buffer[i] = (char)((letter - baseChar + shift) % 26 + baseChar);
+                    return false;
                 }
             }
 
-            return new string(buffer);
+            return true;
+
         }
 
-        static string Decrypt(string text, int shift)
+        static void SquarePrint(int height, int width, string symbol)
         {
-            return Encrypt(text, 26 - (shift % 26));
-        }
-
-        static void InitMultiArray(int[,] arr, int rows, int cols, Random rnd)
-        {
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < cols; j++)
+                if (i == 0 || i == height - 1)
                 {
-                    int randomNum = rnd.Next(-100, 101);
-
-                    arr[i, j] = randomNum;
+                    for (int j = 0; j < width; j++)
+                    {
+                        Console.Write(symbol);
+                    }
                 }
-            }
-        }
-
-        static void InitMultiArrayLowerRange(int[,] arr, int rows, int cols, Random rnd)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
+                else 
                 {
-                    int randomNum = rnd.Next(1, 11);
-
-                    arr[i, j] = randomNum;
+                    Console.Write(symbol);
+                    for (int j = 1; j < width - 1; j++)
+                    {
+                        Console.Write(" ");
+                    }
+                    if (width > 1) Console.Write(symbol); 
                 }
-            }
-        }
-        static void InitMultiArray(float[,] arr, int rows, int cols,  Random rnd)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    float randomNum = 1 + (float)rnd.NextDouble() * 99;
-
-                    arr[i, j] = randomNum;
-                }
-            }
-        }
-        static void InitArray(float[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                float value = float.Parse(Console.ReadLine());
-                arr[i] = value;
+                Console.WriteLine();
             }
         }
 
-        static void PrintArray(float[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                Console.Write($"{arr[i]} ");
-            }
-            Console.Write("\n");
-        }
-        static void PrintMultiArray(int[,] arr, int rows, int cols)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    Console.Write($"{arr[i, j]} ");
-                }
-                Console.Write("\n");
-            }
-            Console.Write("\n");
-        }
-        static void PrintMultiArray(float[,] arr, int rows, int cols)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    Console.Write($"{arr[i, j]} ");
-                }
-                Console.Write("\n");
-            }
-            Console.Write("\n");
-        }
-
-        static float FindMax(float[] A, float[,] B, int rows, int cols)
-        {
-            float max = A[0];
-            foreach (var num in A)
-            {
-                if (num > max) max = num;
-            }
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (B[i, j] > max) max = B[i, j];
-                }
-            }
-            return max;
-        }
-
-        static float FindMin(float[] A, float[,] B, int rows, int cols)
-        {
-            float min = A[0];
-            foreach (var num in A)
-            {
-                if (num < min) min = num;
-            }
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (B[i, j] < min) min = B[i, j];
-                }
-            }
-            return min;
-        }
-
-        static float CalculateTotalSum(float[] A, float[,] B, int rows, int cols)
-        {
-            float sum = 0;
-            foreach (var num in A) sum += num;
-
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < cols; j++)
-                    sum += B[i, j];
-
-            return sum;
-        }
-
-        static float CalculateTotalProduct(float[] A, float[,] B, int rows, int cols)
-        {
-            float product = 1;
-            foreach (var num in A) product *= num;
-
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < cols; j++)
-                    product *= B[i, j];
-
-            return product;
-        }
-
-        static float CalculateEvenSumA(float[] A)
-        {
-            float sum = 0;
-            foreach (var num in A)
-            {
-                if (((int)num % 2) == 0) sum += num;
-            }
-            return sum;
-        }
-
-        static float CalculateOddColumnSumB(float[,] B, int rows, int cols)
-        {
-            float sum = 0;
-            for (int j = 1; j < cols; j += 2) 
-            {
-                for (int i = 0; i < rows; i++)
-                {
-                    sum += B[i, j];
-                }
-            }
-            return sum;
-        }
 
     }
 }
