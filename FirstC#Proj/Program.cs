@@ -9,75 +9,101 @@ namespace FirstC_Proj
     {
         static void Main(string[] args)
         {
-
             #region Task1
 
-            //ReadList myList = new ReadList();
+            //Console.WriteLine("Enter a number:");
 
-            //Book book1 = new Book("1984", "George Orwell");
-            //Book book2 = new Book("Brave New World", "Aldous Huxley");
-            //Book book3 = new Book("Fahrenheit 451", "Ray Bradbury");
+            //string input = Console.ReadLine();
 
-            //myList += book1;
-            //myList += book2;
-            //myList += book3;
-
-            //myList.ShowList();
-
-
-            //myList -= book2;
-            //myList.ShowList();
+            //try
+            //{
+            //    int number = (checked(int.Parse(input)));
+            //    Console.WriteLine($"Converted number: {number}");
+            //}
+            //catch (FormatException)
+            //{
+            //    Console.WriteLine("Invalid input! Please enter a valid integer.");
+            //}
+            //catch (OverflowException)
+            //{
+            //    Console.WriteLine("Overflow exception! The number is out of the range of int.");
+            //}
 
             #endregion
             #region Task2
-            //TemperatureArray weeklyTemps = new TemperatureArray();
 
-            //weeklyTemps[0] = 15.5;
-            //weeklyTemps[1] = 17.3;
-            //weeklyTemps[2] = 19.0;
-            //weeklyTemps[3] = 18.2;
-            //weeklyTemps[4] = 20.1;
-            //weeklyTemps[5] = 22.8;
-            //weeklyTemps[6] = 21.4;
+            //string numStr;
 
-            //weeklyTemps.ShowTemperatures();
+            //Console.WriteLine("Enter str (0 or 1)");
+            //numStr = Console.ReadLine();
 
-            //Console.WriteLine("Temperature on Wednesday: " + weeklyTemps[2] + "°C");
+            //try
+            //{
+            //    int numInt = Convert.ToInt32(numStr, 2);
+            //    Console.WriteLine($"Converted number: {numInt}");
+            //}
+            //catch (FormatException)
+            //{
+            //    Console.WriteLine("Invalid input! Please enter a valid integer.");
+            //}
+            //catch (OverflowException)
+            //{
+            //    Console.WriteLine("Overflow exception! The number is out of the range of int.");
+            //}
             #endregion
             #region Task3
-            Fraction f1 = new Fraction(3, 4);
-            Fraction f2 = new Fraction(2, 5);
+            //try
+            //{
+            //    CreditCard card1 = new CreditCard("1234567890123456", "John Doe", new DateTime(2027, 12, 31), "123", 5000);
+            //    CreditCard card2 = new CreditCard("9876543210987654", "Jane Smith", new DateTime(2026, 5, 31), "456", 7000);
 
-            Console.WriteLine($"f1: {f1}");
-            Console.WriteLine($"f2: {f2}");
+            //    Console.WriteLine(card1);
+            //    Console.WriteLine(card2);
 
-            Console.WriteLine($"f1 + f2 = {f1 + f2}");
-            Console.WriteLine($"f1 - f2 = {f1 - f2}");
-            Console.WriteLine($"f1 * f2 = {f1 * f2}");
-            Console.WriteLine($"f1 / f2 = {f1 / f2}");
+            //    card1 += 2000;
+            //    card2 -= 3000;
 
-            Console.WriteLine($"f1 == f2: {f1 == f2}");
-            Console.WriteLine($"f1 != f2: {f1 != f2}");
+            //    Console.WriteLine("After transactions:");
+            //    Console.WriteLine(card1);
+            //    Console.WriteLine(card2);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error: {ex.Message}");
+            //}
             #endregion
             #region Task4
-            //Product product1 = new Product("Laptop", 10, 999.99m);
-            //Product product2 = new Product("Tablet", 5, 499.99m);
+            Console.WriteLine("Enter a mathematical expression (example, 3*2*1*4):");
+            string input = Console.ReadLine();
 
-            //Console.WriteLine(product1);
-            //Console.WriteLine(product2);
-
-            //product1 += 5;
-            //Console.WriteLine("After adding 5: " + product1);
-
-            //product2 -= 2;
-            //Console.WriteLine("After removing 2: " + product2);
-
-            //Console.WriteLine("Are prices equal? " + (product1 == product2));
-            //Console.WriteLine("Is product1 quantity greater than product2? " + (product1 > product2));
+            try
+            {
+                int result = CalculateExpression(input);
+                Console.WriteLine($"Result: {result}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
             #endregion
         }
+        static int CalculateExpression(string expression)
+        {
+            if (string.IsNullOrWhiteSpace(expression))
+                throw new ArgumentException("The expression cannot be empty.");
 
+            string[] parts = expression.Split('*');
+            int result = 1;
 
+            foreach (string part in parts)
+            {
+                if (!int.TryParse(part.Trim(), out int number))
+                    throw new FormatException("Invalid input format. The expression must contain only integers and *.");
 
+                result *= number;
+            }
+
+            return result;
+        }
     }
 }

@@ -4,64 +4,143 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+
 namespace FirstC_Proj
 {
     internal class CreditCard
     {
+        private string _cardNumber;
+        private string _fullName;
+        private DateTime _endDate;
+        private string _cvc;
+        private int _balance;
 
-        public int Balance { get; set; }
-        public int CVC { get; set; }
+        public string CardNumber
+        {
+            get => _cardNumber;
+            set
+            {
+                if (value.Length < 13 || value.Length > 19 || !long.TryParse(value, out _))
+                    throw new ArgumentException("Invalid card number! It must be 13-19 digits.");
+                _cardNumber = value;
+            }
+        }
+
+        public string FullName
+        {
+            get => _fullName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Full name cannot be empty!");
+                _fullName = value;
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set
+            {
+                if (value < DateTime.Now)
+                    throw new ArgumentException("The card is expired!");
+                _endDate = value;
+            }
+        }
+
+        public string CVC
+        {
+            get => _cvc;
+            set
+            {
+                if (value.Length != 3 || !int.TryParse(value, out _))
+                {
+                    throw new ArgumentException("CVC must be exactly 3 digits.");
+                }
+                _cvc = value;
+            }
+        }
+
+        public int Balance
+        {
+            get => _balance;
+            private set
+            {
+                _balance = value;
+            }
+        }
 
         public CreditCard() { }
 
-        public CreditCard(int balance, int cvc)
+        public CreditCard(string cardNumber, string fullName, DateTime endDate, string cvc, int balance)
         {
-            Balance = balance;
+            CardNumber = cardNumber;
+            FullName = fullName;
+            EndDate = endDate;
             CVC = cvc;
+            Balance = balance;
         }
 
         public override bool Equals(object obj)
         {
-            return this.ToString() == obj.ToString();
+            if (obj is CreditCard other)
+            {
+                return CardNumber == other.CardNumber &&
+                       FullName == other.FullName &&
+                       CVC == other.CVC &&
+                       EndDate == other.EndDate;
+            }
+            return false;
         }
+
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return HashCode.Combine(CardNumber, FullName, CVC, EndDate);
         }
 
-        public static int operator +(CreditCard bal, int value)
+        public static CreditCard operator +(CreditCard card, int amount)
         {
-            return bal.Balance + value;
+            card.Balance += amount;
+            return card;
         }
 
-        public static int operator -(CreditCard bal, int value)
+        public static CreditCard operator -(CreditCard card, int amount)
         {
-            return bal.Balance - value;
+            if (amount < 0) throw new ArgumentException("Amount cannot be negative!");
+            card.Balance -= amount;
+            return card;
         }
 
-        public static bool operator ==(CreditCard popul1, CreditCard popul2)
+        public static bool operator ==(CreditCard card1, CreditCard card2)
         {
-            return popul1.Equals(popul2);
-        }
-        public static bool operator !=(CreditCard emp1, CreditCard emp2)
-        {
-            return !(emp1 == emp2);
-        }
-        public static bool operator >(CreditCard cvc1, CreditCard cvc2)
-        {
-            return cvc1.CVC > cvc2.CVC;
+            if (card1 is null || card2 is null) return false;
+            return card1.Equals(card2);
         }
 
-        public static bool operator <(CreditCard cvc1, CreditCard cvc2)
+        public static bool operator !=(CreditCard card1, CreditCard card2)
         {
-            return cvc1.CVC < cvc2.CVC;
+            return !(card1 == card2);
         }
 
+        public static bool operator >(CreditCard card1, CreditCard card2)
+        {
+            return card1.Balance > card2.Balance;
+        }
+
+        public static bool operator <(CreditCard card1, CreditCard card2)
+        {
+            return card1.Balance < card2.Balance;
+        }
 
         public override string ToString()
         {
-            return $"Balance: {Balance}\nCVC: {CVC}";
+            return $"Card Number: {CardNumber}\n" +
+                   $"Full Name: {FullName}\n" +
+                   $"End Date: {EndDate:mm/yyyy}\n" +
+                   $"CVC: ***\n" +
+                   $"Balance: {Balance}$";
         }
-
     }
 }
+
