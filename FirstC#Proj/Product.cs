@@ -6,86 +6,31 @@ using System.Threading.Tasks;
 
 namespace FirstC_Proj
 {
-    internal class Product
+    class Product
     {
-        public string Name { get; set; }
-        private int quantity;
-        private decimal price;
+        private string name;
+        private Money price;
 
-        public int Quantity
+        public Product(string n, int w, int c)
         {
-            get => quantity;
-            set
-            {
-                if (value < 0)
-                    Console.WriteLine("Quantity cannot be negative.");
-                quantity = value;
-            }
+            name = n;
+            price = new Money(w, c);
         }
 
-        public decimal Price
+        public void SetPrice(int w, int c)
         {
-            get => price;
-            set
-            {
-                if (value < 0)
-                    Console.WriteLine("Price cannot be negative.");
-                price = value;
-            }
+            price.SetMoney(w, c);
         }
 
-        public Product(string name, int quantity, decimal price)
+        public void Show()
         {
-            Name = name;
-            Quantity = quantity;
-            Price = price;
+            Console.Write($"Product: {name}, Price: ");
+            price.Display();
         }
 
-        public static Product operator +(Product p, int amount)
+        public void Discount(int amount)
         {
-            return new Product(p.Name, p.Quantity + amount, p.Price);
-        }
-
-        public static Product operator -(Product p, int amount)
-        {
-            if (p.Quantity - amount < 0)
-                Console.WriteLine("Resulting quantity cannot be negative.");
-            return new Product(p.Name, p.Quantity - amount, p.Price);
-        }
-
-        public static bool operator ==(Product p1, Product p2)
-        {
-            return p1.Price == p2.Price;
-        }
-
-        public static bool operator !=(Product p1, Product p2)
-        {
-            return !(p1 == p2);
-        }
-
-        public static bool operator >(Product p1, Product p2)
-        {
-            return p1.Quantity > p2.Quantity;
-        }
-
-        public static bool operator <(Product p1, Product p2)
-        {
-            return p1.Quantity < p2.Quantity;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Product product && this == product;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name, Quantity, Price);
-        }
-
-        public override string ToString()
-        {
-            return $"{Name}: {Quantity} pcs, ${Price}";
+            price.Decrease(amount);
         }
     }
 }

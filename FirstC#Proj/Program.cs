@@ -10,100 +10,72 @@ namespace FirstC_Proj
         static void Main(string[] args)
         {
             #region Task1
+            //Product apple = new Product("Apple", 2, 50);
+            //apple.Show();
 
-            //Console.WriteLine("Enter a number:");
-
-            //string input = Console.ReadLine();
-
-            //try
-            //{
-            //    int number = (checked(int.Parse(input)));
-            //    Console.WriteLine($"Converted number: {number}");
-            //}
-            //catch (FormatException)
-            //{
-            //    Console.WriteLine("Invalid input! Please enter a valid integer.");
-            //}
-            //catch (OverflowException)
-            //{
-            //    Console.WriteLine("Overflow exception! The number is out of the range of int.");
-            //}
-
+            //apple.Discount(30);
+            //apple.Show();
             #endregion
             #region Task2
-
-            //string numStr;
-
-            //Console.WriteLine("Enter str (0 or 1)");
-            //numStr = Console.ReadLine();
-
-            //try
+            //Device[] devices =
             //{
-            //    int numInt = Convert.ToInt32(numStr, 2);
-            //    Console.WriteLine($"Converted number: {numInt}");
-            //}
-            //catch (FormatException)
+            //    new Kettle("Electric Kettle", "Philips", 1.5, 2200),
+            //    new Microwave("Kitchen Microwave", "Samsung", 30, 1000),
+            //    new Car("Sport Car", "Ferrari", 3.9, 710),
+            //    new Steamer("Ocean Steamer", "Steam Turbine", 50000, 30)
+            //};
+
+            //foreach (var device in devices)
             //{
-            //    Console.WriteLine("Invalid input! Please enter a valid integer.");
-            //}
-            //catch (OverflowException)
-            //{
-            //    Console.WriteLine("Overflow exception! The number is out of the range of int.");
+            //    device.Show();
+            //    device.Sound();
+            //    device.Desc();
+            //    Console.WriteLine();
             //}
             #endregion
             #region Task3
-            //try
+            //MusicalInstruments[] instruments =
             //{
-            //    CreditCard card1 = new CreditCard("1234567890123456", "John Doe", new DateTime(2027, 12, 31), "123", 5000);
-            //    CreditCard card2 = new CreditCard("9876543210987654", "Jane Smith", new DateTime(2026, 5, 31), "456", 7000);
+            //    new Violin("Stradivarius Violin", "Maple & Spruce", 4),
+            //    new Trombone("Yamaha Trombone", "Tenor", 130),
+            //    new Ukulele("Kala Ukulele", "Concert", 4),
+            //    new Cello("Guarneri Cello", "Full Size", "Horsehair")
+            //};
 
-            //    Console.WriteLine(card1);
-            //    Console.WriteLine(card2);
-
-            //    card1 += 2000;
-            //    card2 -= 3000;
-
-            //    Console.WriteLine("After transactions:");
-            //    Console.WriteLine(card1);
-            //    Console.WriteLine(card2);
-            //}
-            //catch (Exception ex)
+            //foreach (var instrument in instruments)
             //{
-            //    Console.WriteLine($"Error: {ex.Message}");
+            //    instrument.Show();
+            //    instrument.Sound();
+            //    instrument.Desc();
+            //    instrument.History();
+            //    Console.WriteLine();
             //}
             #endregion
             #region Task4
-            Console.WriteLine("Enter a mathematical expression (example, 3*2*1*4):");
-            string input = Console.ReadLine();
+            //Worker[] workers =
+            //{
+            //    new President("Alice Johnson"),
+            //    new Security("Bob Smith"),
+            //    new Manager("Charlie Davis"),
+            //    new Engineer("David Brown")
+            //};
 
-            try
-            {
-                int result = CalculateExpression(input);
-                Console.WriteLine($"Result: {result}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            //foreach (var worker in workers)
+            //{
+            //    worker.Print();
+            //    Console.WriteLine();
+            //}
             #endregion
-        }
-        static int CalculateExpression(string expression)
-        {
-            if (string.IsNullOrWhiteSpace(expression))
-                throw new ArgumentException("The expression cannot be empty.");
+            #region Task5
+            //Course offlineCourse = new Course("Mathematics", 40);
+            //OnlineCourse onlineCourse = new OnlineCourse("C# Programming", 30, "Udemy");
 
-            string[] parts = expression.Split('*');
-            int result = 1;
+            //Console.WriteLine(offlineCourse);
+            //Console.WriteLine(onlineCourse);
+            #endregion
+            #region Task6
 
-            foreach (string part in parts)
-            {
-                if (!int.TryParse(part.Trim(), out int number))
-                    throw new FormatException("Invalid input format. The expression must contain only integers and *.");
-
-                result *= number;
-            }
-
-            return result;
+            #endregion
         }
     }
 }
