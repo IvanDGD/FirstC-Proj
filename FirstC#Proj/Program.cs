@@ -74,7 +74,18 @@ namespace FirstC_Proj
             //Console.WriteLine(onlineCourse);
             #endregion
             #region Task6
+            List<Product> products = new List<Product>
+            {
+                new Electronics("Smartphone", 1000),
+                new Electronics("Laptop", 1500),
+                new Furniture("Sofa", 800),
+                new Furniture("Dining Table", 1200)
+            };
 
+            foreach (var product in products)
+            {
+                Console.WriteLine(product);
+            }
             #endregion
         }
     }

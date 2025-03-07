@@ -6,31 +6,22 @@ using System.Threading.Tasks;
 
 namespace FirstC_Proj
 {
-    class Product
+    abstract class Product
     {
-        private string name;
-        private Money price;
+        public string Name { get; set; }
+        public double Price { get; set; }
 
-        public Product(string n, int w, int c)
+        public Product(string name, double price)
         {
-            name = n;
-            price = new Money(w, c);
+            Name = name;
+            Price = price;
         }
 
-        public void SetPrice(int w, int c)
-        {
-            price.SetMoney(w, c);
-        }
+        public abstract double CalculateDiscount();
 
-        public void Show()
+        public override string ToString()
         {
-            Console.Write($"Product: {name}, Price: ");
-            price.Display();
-        }
-
-        public void Discount(int amount)
-        {
-            price.Decrease(amount);
+            return $"{Name}, Price: ${Price}, Discounted Price: ${Price - CalculateDiscount()}";
         }
     }
 }
