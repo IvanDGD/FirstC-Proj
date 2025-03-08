@@ -9,84 +9,48 @@ namespace FirstC_Proj
     {
         static void Main(string[] args)
         {
-            #region Task1
-            //Product apple = new Product("Apple", 2, 50);
-            //apple.Show();
+            Money m1 = new Money(10, 50);
+            Money m2 = new Money(5, 75);
+            Money result;
 
-            //apple.Discount(30);
-            //apple.Show();
-            #endregion
-            #region Task2
-            //Device[] devices =
-            //{
-            //    new Kettle("Electric Kettle", "Philips", 1.5, 2200),
-            //    new Microwave("Kitchen Microwave", "Samsung", 30, 1000),
-            //    new Car("Sport Car", "Ferrari", 3.9, 710),
-            //    new Steamer("Ocean Steamer", "Steam Turbine", 50000, 30)
-            //};
+            Console.WriteLine("Start sum:");
+            m1.Display();
+            m2.Display();
 
-            //foreach (var device in devices)
-            //{
-            //    device.Show();
-            //    device.Sound();
-            //    device.Desc();
-            //    Console.WriteLine();
-            //}
-            #endregion
-            #region Task3
-            //MusicalInstruments[] instruments =
-            //{
-            //    new Violin("Stradivarius Violin", "Maple & Spruce", 4),
-            //    new Trombone("Yamaha Trombone", "Tenor", 130),
-            //    new Ukulele("Kala Ukulele", "Concert", 4),
-            //    new Cello("Guarneri Cello", "Full Size", "Horsehair")
-            //};
+            result = m1 + m2;
+            Console.Write("Addition: ");
+            result.Display();
 
-            //foreach (var instrument in instruments)
-            //{
-            //    instrument.Show();
-            //    instrument.Sound();
-            //    instrument.Desc();
-            //    instrument.History();
-            //    Console.WriteLine();
-            //}
-            #endregion
-            #region Task4
-            //Worker[] workers =
-            //{
-            //    new President("Alice Johnson"),
-            //    new Security("Bob Smith"),
-            //    new Manager("Charlie Davis"),
-            //    new Engineer("David Brown")
-            //};
+            result = m1 - m2;
+            Console.Write("Subtraction: ");
+            result.Display();
 
-            //foreach (var worker in workers)
-            //{
-            //    worker.Print();
-            //    Console.WriteLine();
-            //}
-            #endregion
-            #region Task5
-            //Course offlineCourse = new Course("Mathematics", 40);
-            //OnlineCourse onlineCourse = new OnlineCourse("C# Programming", 30, "Udemy");
+            result = m1 * 2;
+            Console.Write("Multiplication by 2: ");
+            result.Display();
 
-            //Console.WriteLine(offlineCourse);
-            //Console.WriteLine(onlineCourse);
-            #endregion
-            #region Task6
-            List<Product> products = new List<Product>
+            result = m1 / 2;
+            Console.Write("Division by 2: ");
+            result.Display();
+
+            Console.Write("Increment (m1++): ");
+            m1++;
+            m1.Display();
+
+            Console.Write("Decrement (m1--): ");
+            m1--;
+            m1.Display();
+
+            try
             {
-                new Electronics("Smartphone", 1000),
-                new Electronics("Laptop", 1500),
-                new Furniture("Sofa", 800),
-                new Furniture("Dining Table", 1200)
-            };
-
-            foreach (var product in products)
-            {
-                Console.WriteLine(product);
+                result = m2 - m1;
+                Console.Write("Subtraction (m2 - m1): ");
+                result.Display();
             }
-            #endregion
+            catch (BankruptException ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
         }
     }
 }
