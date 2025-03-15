@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System;
 
-namespace FirstC_Proj
+namespace FirstC_Proj.Exceptions
 {
     internal class CreditCard
     {

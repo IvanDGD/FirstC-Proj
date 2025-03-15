@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace FirstC_Proj.IInterfaces.IOutput
 {
-    internal class MyArray : IOutput, IMath
+    internal class MyArray : IOutput, IMath, ICalc, IOutput2, ICalc2
     {
-        private int Length { set; get; } = 0;
-        private int[] Array { set; get; } = new int[0];
+        public int Length { get; }
+        public int[] Array { get; }
 
-        public MyArray(int length)
+        public MyArray(int length, params int[] array)
         {
             Length = length;
             Array = new int[length];
+
+            int limit = (array.Length < length) ? array.Length : length;
+            for (int i = 0; i < limit; i++)
+            {
+                Array[i] = array[i];
+            }
         }
 
 
@@ -74,6 +80,95 @@ namespace FirstC_Proj.IInterfaces.IOutput
                     return true;
             }
             return false;
+        }
+
+        public int Less(int valueToCompare)
+        {
+            int count = 0;
+            for (int i = 0; i < Length; i++)
+            {
+                if (valueToCompare > Array[i])
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public int Greater(int valueToCompare)
+        {
+            int count = 0;
+            for (int i = 0; i < Length; i++)
+            {
+                if (valueToCompare < Array[i])
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public void ShowEven()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                if (Array[i] % 2 == 0)
+                {
+                    Console.Write(Array[i]);
+                }
+            }
+            Console.Write("\n");
+        }
+
+        public void ShowOdd()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                if (!(Array[i] % 2 == 0))
+                {
+                    Console.Write(Array[i]);
+                }
+            }
+            Console.Write("\n");
+        }
+
+        public int CountDistinct()
+        {
+            int count = 0;
+
+            for (int i = 0; i < Length; i++)
+            {
+                bool isUnique = true;
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (Array[i] == Array[j])
+                    {
+                        isUnique = false;
+                        break;
+                    }
+                }
+
+                if (isUnique)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int EqualToValue(int valueToCompare)
+        {
+            int count = 0; 
+            for (int i = 0; i < Length; i++)
+            {
+                if (Array[i] == valueToCompare)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }
