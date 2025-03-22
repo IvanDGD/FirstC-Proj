@@ -8,17 +8,22 @@ namespace FirstC_Proj.GenericCollections
 {
     internal class Book
     {
-        public string Title { get; }
-        public string Author { get; }
-        public int PublicationYear { get; }
-        public string Genre { get; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Genre { get; set; }
+        public int Year { get; set; }
 
-        public Book(string title, string author, int publicationYear, string genre)
+        public Book(string title, string author, string genre, int year)
         {
             Title = title;
             Author = author;
-            PublicationYear = publicationYear;
             Genre = genre;
+            Year = year;
+        }
+
+        public override string ToString()
+        {
+            return $"{Title} by {Author}, Genre: {Genre}, Year: {Year}";
         }
     }
 }

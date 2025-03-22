@@ -312,13 +312,74 @@ namespace FirstC_Proj
             //employeeManagement.DisplayEmployees();
             #endregion
             #region Task12
+            //BookManager bookManager = new BookManager();
 
+            //bookManager.AddBook(new GenericCollections.Book("The Great Gatsby", "F. Scott Fitzgerald", "Novel", 1925));
+            //bookManager.AddBook(new GenericCollections.Book("1984", "George Orwell", "Dystopian", 1949));
+            //bookManager.AddBook(new GenericCollections.Book("To Kill a Mockingbird", "Harper Lee", "Fiction", 1960));
+
+            //Console.WriteLine("Books after addition:");
+            //bookManager.DisplayBooks();
+
+            //bookManager.InsertBookAtBeginning(new GenericCollections.Book("Brave New World", "Aldous Huxley", "Dystopian", 1932));
+            //bookManager.InsertBookAtEnd(new GenericCollections.Book("Moby-Dick", "Herman Melville", "Adventure", 1851));
+            //bookManager.InsertBookAtPosition(new GenericCollections.Book("War and Peace", "Leo Tolstoy", "Historical", 1869), 2);
+
+            //Console.WriteLine("\nBooks after insertions:");
+            //bookManager.DisplayBooks();
+
+            //Console.WriteLine("\nSearching for books with 'Dystopian':");
+            //var searchResults = bookManager.SearchBooks("Dystopian");
+            //foreach (var book in searchResults)
+            //{
+            //    Console.WriteLine(book);
+            //}
+
+            //bookManager.UpdateBook("1984", new GenericCollections.Book("Nineteen Eighty-Four", "George Orwell", "Dystopian", 1949));
+
+            //Console.WriteLine("\nBooks after update:");
+            //bookManager.DisplayBooks();
+
+            //bookManager.RemoveBook("Moby-Dick");
+
+            //bookManager.RemoveBookFromBeginning();
+            //bookManager.RemoveBookFromEnd();
+            //bookManager.RemoveBookAtPosition(1);
+
+            //Console.WriteLine("\nBooks after removals:");
+            //bookManager.DisplayBooks();
             #endregion
             #region Task13
+            //ClinicQueue clinicQueue = new ClinicQueue(3);
 
+            //clinicQueue.AddPatient("John Doe", 2);
+            //clinicQueue.AddPatient("Jane Smith", 4);
+            //clinicQueue.AddPatient("Alice Brown", 1);
+            //clinicQueue.AddPatient("Bob Johnson", 3);
+
+            //clinicQueue.DisplayQueue();
+
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    clinicQueue.ProcessPatient();
+            //}
+
+            //clinicQueue.DisplayQueue();
             #endregion
             #region Task14
+            GymManager gymManager = new GymManager();
 
+            gymManager.AddVisit("John Doe");
+            gymManager.AddVisit("Jane Smith");
+            gymManager.AddVisit("John Doe");
+
+            gymManager.ShowLastVisits("John Doe", 2);
+
+            gymManager.CancelLastVisit("John Doe");
+
+            DateTime startDate = DateTime.Now.AddMinutes(-5);
+            DateTime endDate = DateTime.Now;
+            gymManager.ShowVisitsInPeriod(startDate, endDate);
             #endregion
         }
     }
