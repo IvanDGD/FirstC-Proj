@@ -1,4 +1,5 @@
-﻿using FirstC_Proj.GenericCollections;
+﻿using FirstC_Proj.GenericCollectionHW;
+using FirstC_Proj.GenericCollections;
 using System;
 using System.Collections.Generic;
 
@@ -7,380 +8,128 @@ namespace FirstC_Proj
 
     class Program
     {
-        static T MaxOfThree<T>(T a, T b, T c) where T : IComparable<T>
-        {
-            return (a.CompareTo(b) > 0) ? ((a.CompareTo(c) > 0) ? a : c) : ((b.CompareTo(c) > 0) ? b : c);
-        }
-        static T MinOfThree<T>(T a, T b, T c) where T : IComparable<T>
-        {
-            return (a.CompareTo(b) < 0) ? ((a.CompareTo(c) < 0) ? a : c) : ((b.CompareTo(c) < 0) ? b : c);
+
+        static void Swap<T>(ref T a, ref T b) {
+            T temp = a;
+            a = b;
+            b = temp;
         }
 
-        static T SumArray<T>(T[] array) where T : struct
-        {
-            dynamic sum = default(T);
-            foreach (T item in array)
-            {
-                sum += item;
-            }
-            return sum;
-        }
-
-        class MyStack<T>
-        {
-            private T[] items;
-            private int top;
-
-            public int Count => top + 1;
-
-            public MyStack(int capacity = 10)
-            {
-                items = new T[capacity];
-                top = -1;
-            }
-
-            public void Push(T item)
-            {
-                if (top == items.Length - 1)
-                {
-                    Console.WriteLine("Stack overflow");
-                }
-
-                items[++top] = item;
-            }
-
-            public T Pop()
-            {
-                if (top == -1)
-                {
-                    Console.WriteLine("Stack is empty");
-                }
-
-                return items[top--];
-            }
-
-            public T Peek()
-            {
-                if (top == -1)
-                {
-                    Console.WriteLine("Stack is empty");
-                }
-                return items[top];
-            }
-        }
-
-        class MyQueue<T>
-        {
-            private T[] items;
-            private int top;
-            private int last;
-            private int count;
-            private int capacity;
-
-            public int Count => count;
-
-            public MyQueue(int capacity = 10)
-            {
-                this.capacity = capacity;
-                items = new T[capacity];
-                top = 0;
-                last = -1;
-                count = 0;
-            }
-
-            public void Enqueue(T item)
-            {
-                if (count == capacity)
-                {
-                    Console.WriteLine("Queue overflow");
-                }
-
-                last = (last + 1) % capacity;
-                items[last] = item;
-                count++;
-            }
-
-            public T Dequeue()
-            {
-                if (count == 0)
-                {
-                    Console.WriteLine("Queue is empty");
-                }
-                T item = items[top];
-                top = (top + 1) % capacity;
-                count--;
-                return item;
-            }
-
-            public T Peek()
-            {
-                if (count == 0)
-                {
-                    Console.WriteLine("Queue is empty");
-                }
-
-                return items[top];
-            }
-        }
-        public delegate bool Criteria<T>(T item);
-
-        static IEnumerable<T> FilterByTwoCriteria<T>(IEnumerable<T> collection, Criteria<T> criteria1, Criteria<T> criteria2)
-        {
-            List<T> result = new List<T>();
-
-            foreach (T item in collection)
-            {
-                if (criteria1(item) && criteria2(item))
-                {
-                    result.Add(item);
-                }
-            }
-
-            return result;
-        }
         static void Main()
         {
             #region Task1
-            //Console.WriteLine("Max of (3, 7, 5): " + MaxOfThree(3, 7, 5));
-            //Console.WriteLine("Max of (2.5, 1.8, 3.9): " + MaxOfThree(2.5, 1.8, 3.9));
-            //Console.WriteLine("Max of ('a', 'z', 'm'): " + MaxOfThree('a', 'z', 'm'));
+            //int num1 = 10;
+            //int num2 = 20;
+            //Swap(ref num1, ref num2);
+            //Console.WriteLine(num1);
+            //Console.WriteLine(num2);
+            //string str1 = "asdf";
+            //string str2 = "abc";
+            //Swap(ref str1, ref str2);
+            //Console.WriteLine(str1);
+            //Console.WriteLine(str2);
             #endregion
             #region Task2
-            //Console.WriteLine("Max of (3, 7, 5): " + MinOfThree(3, 7, 5));
-            //Console.WriteLine("Max of (2.5, 1.8, 3.9): " + MinOfThree(2.5, 1.8, 3.9));
-            //Console.WriteLine("Max of ('a', 'z', 'm'): " + MinOfThree('a', 'z', 'm'));
+            //PriorityQueue<int> pq = new PriorityQueue<int>();
+
+            //pq.Enqueue(5);
+            //pq.Enqueue(2);
+            //pq.Enqueue(8);
+            //pq.Enqueue(1);
+
+            //Console.WriteLine("Priority Queue:");
+
+            //while (pq.Count > 0)
+            //{
+            //    Console.WriteLine(pq.Dequeue());
+            //}
             #endregion
             #region Task3
-            //int[] intArray = { 1, 2, 3, 4, 5 };
-            //double[] doubleArray = { 1.1, 2.2, 3.3, 4.4 };
-            //float[] floatArray = { 10.5f, 20.5f, 30.5f };
+            //CircleQueue<int> cq = new CircleQueue<int>(4);
 
-            //Console.WriteLine("Sum of int array: " + SumArray(intArray));
-            //Console.WriteLine("Sum of double array: " + SumArray(doubleArray));
-            //Console.WriteLine("Sum of float array: " + SumArray(floatArray));
+            //cq.Enqueue(5);
+            //cq.Enqueue(2);
+            //cq.Enqueue(8);
+            //cq.Enqueue(1);
+
+            //Console.WriteLine("Circle Queue:");
+
+            //while (cq.Count > 0)
+            //{
+            //    Console.WriteLine(cq.Dequeue());
+            //}
             #endregion
             #region Task4
-            //MyStack<int> stack = new MyStack<int>(5);
+            //SingleLinkedList<int> list = new SingleLinkedList<int>();
 
-            //stack.Push(10);
-            //stack.Push(20);
-            //stack.Push(30);
-
-            //Console.WriteLine("Top element (Peek): " + stack.Peek());
-            //Console.WriteLine("Popped element: " + stack.Pop());
-            //Console.WriteLine("Stack count: " + stack.Count);
+            //list.Add(5);
+            //list.Add(2);
+            //list.Add(8);
+            //list.Add(1);
+            //list.PrintAll();
+            //list.Remove(5);
+            //list.PrintAll();
             #endregion
             #region Task5
-            //MyQueue<int> queue = new MyQueue<int>(5);
+            //DoubleLinkedList<int> list = new DoubleLinkedList<int>();
 
-            //queue.Enqueue(10);
-            //queue.Enqueue(20);
-            //queue.Enqueue(30);
-
-            //Console.WriteLine("Top element (Peek): " + queue.Peek());
-            //Console.WriteLine("Dequeued element: " + queue.Dequeue()); 
-            //Console.WriteLine("Queue count: " + queue.Count);
+            //list.Add(5);
+            //list.Add(2);
+            //list.Add(8);
+            //list.Add(1);
+            //list.PrintAll();
+            //list.Remove(2);
+            //list.PrintAll();
             #endregion
             #region Task6
-            //List<int> numbers = new List<int> { 5, 12, 18, 7, 24, 30, 3 };
-            //IEnumerable<int> filteredNumbers = FilterByTwoCriteria<int>(numbers, x => x > 10, x => x % 2 == 0);
+            List<int> numbersOdd = new List<int> { 5, 2, 9, 1, 6 };
+            Console.WriteLine($"Median of numbersOdd: {FindMedian(numbersOdd)}");
 
-            //Console.Write("Filtered numbers: ");
-            //foreach (int number in filteredNumbers)
-            //{
-            //    Console.Write(number + " ");
-            //}
-            //Console.WriteLine();
+            List<string> wordsOdd = new List<string> { "apple", "banana", "cherry", "date", "fig" };
+            Console.WriteLine($"Median of wordsOdd: {FindMedian(wordsOdd)}");
 
-            //List<string> words = new List<string> { "apple", "dog", "banana", "car", "ant", "table" };
-            //IEnumerable<string> filteredWords = FilterByTwoCriteria<string>(words, s => s.Length > 3, s => s.Contains('a'));
+            List<float> numbersEven = new List<float> { 4, 1, 7, 9, 3, 8 };
+            Console.WriteLine($"Median of numbersEven: {FindMedian(numbersEven)}");
 
-            //Console.Write("Filtered words: ");
-            //foreach (string word in filteredWords)
-            //{
-            //    Console.Write(word + " ");
-            //}
-            //Console.WriteLine();
+            List<string> wordsEven = new List<string> { "apple", "banana", "cherry", "date" };
+            Console.WriteLine($"Median of wordsEven: {FindMedian(wordsEven)}");
+
+            List<int> emptyList = new List<int>();
+            Console.WriteLine($"Median of empty list: {FindMedian(emptyList)}");
             #endregion
-            #region Task7
-            //ABC alphabet = new ABC();
+        }
 
-            //Console.WriteLine("Letters in the English alphabet:");
-            //foreach (char letter in alphabet)
-            //{
-            //    Console.Write(letter + " ");
-            //}
-            //Console.WriteLine();
-            #endregion
-            #region Task8
-            //House house = new House();
+        static T FindMedian<T>(IList<T> collection) where T : IComparable<T>
+        {
+            if (collection == null || collection.Count == 0)
+            {
+                Console.WriteLine("Collection cannot be empty");
+                return default;
+            }
 
-            //Apartment apartment1 = new Apartment("1A");
-            //apartment1.AddResident("Alice");
-            //apartment1.AddResident("Bob");
+            List<T> sortedList = new List<T>(collection);
+            sortedList.Sort();
 
-            //Apartment apartment2 = new Apartment("2B");
-            //apartment2.AddResident("Charlie");
-            //apartment2.AddResident("David");
+            int count = sortedList.Count;
+            int mid = count / 2;
 
-            //house.AddApartment(apartment1);
-            //house.AddApartment(apartment2);
-
-            //Console.WriteLine("Apartments in the house:");
-            //foreach (Apartment apartment in house)
-            //{
-            //    Console.WriteLine($"Apartment {apartment.Number}:");
-            //    foreach (string resident in apartment)
-            //    {
-            //        Console.WriteLine($" - Resident: {resident}");
-            //    }
-            //}
-            #endregion
-            #region Task9
-            //Garage garage = new Garage();
-            //garage.AddCar(new GenericCollections.Car("Toyota", "Red"));
-            //garage.AddCar(new GenericCollections.Car("Honda", "Blue"));
-            //garage.AddCar(new GenericCollections.Car("Ford", "Green"));
-
-            //foreach (GenericCollections.Car car in garage)
-            //{
-            //    Console.WriteLine($"Car Model: {car.Model}, Color: {car.Color}");
-            //}
-            #endregion
-            #region Task10
-            //Library<GenericCollections.Book> library = new Library<GenericCollections.Book>();
-
-            //library.AddBook(new GenericCollections.Book("The Great Gatsby", "F. Scott Fitzgerald", 1925, "Novel"));
-            //library.AddBook(new GenericCollections.Book("1984", "George Orwell", 1949, "Dystopian"));
-            //library.AddBook(new GenericCollections.Book("The Catcher in the Rye", "J.D. Salinger", 1951, "Novel"));
-            //library.AddBook(new GenericCollections.Book("To Kill a Mockingbird", "Harper Lee", 1960, "Novel"));
-
-            //Console.WriteLine("All Books in the Library:");
-            //foreach (GenericCollections.Book book in library)
-            //{
-            //    Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, Year: {book.PublicationYear}, Genre: {book.Genre}");
-            //}
-
-            //Console.WriteLine("\nSearching for 'Novel' genre:");
-            //foreach (GenericCollections.Book book in library.SearchByGenre("Novel"))
-            //{
-            //    Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, Year: {book.PublicationYear}, Genre: {book.Genre}");
-            //}
-
-            //Console.WriteLine("\nSearching for books published in 1949:");
-            //foreach (GenericCollections.Book book in library.SearchByPublicationYear(1949))
-            //{
-            //    Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, Year: {book.PublicationYear}, Genre: {book.Genre}");
-            //}
-            #endregion
-            #region Task11
-            //EmployeeManager employeeManagement = new EmployeeManager();
-
-            //employeeManagement.AddEmployee(new GenericCollections.Employee("John Doe", "Software Engineer", 60000, "john.doe@example.com"));
-            //employeeManagement.AddEmployee(new GenericCollections.Employee("Jane Smith", "Project Manager", 80000, "jane.smith@example.com"));
-            //employeeManagement.AddEmployee(new GenericCollections.Employee("Emily Davis", "Designer", 55000, "emily.davis@example.com"));
-
-            //Console.WriteLine("Employees after addition:");
-            //employeeManagement.DisplayEmployees();
-
-            //employeeManagement.UpdateEmployee("john.doe@example.com", new GenericCollections.Employee("John Doe", "Senior Software Engineer", 70000, "john.doe@example.com"));
-
-            //Console.WriteLine("\nSearching for employees with 'Engineer':");
-            //var searchResults = employeeManagement.SearchEmployees("Engineer");
-            //foreach (var employee in searchResults)
-            //{
-            //    Console.WriteLine(employee);
-            //}
-
-            //Console.WriteLine("\nEmployees sorted by salary:");
-            //var sortedBySalary = employeeManagement.SortEmployeesBySalary();
-            //foreach (var employee in sortedBySalary)
-            //{
-            //    Console.WriteLine(employee);
-            //}
-
-            //Console.WriteLine("\nEmployees sorted by name:");
-            //var sortedByName = employeeManagement.SortEmployeesByName();
-            //foreach (var employee in sortedByName)
-            //{
-            //    Console.WriteLine(employee);
-            //}
-
-            //employeeManagement.RemoveEmployee("jane.smith@example.com");
-
-            //Console.WriteLine("\nEmployees after removal:");
-            //employeeManagement.DisplayEmployees();
-            #endregion
-            #region Task12
-            //BookManager bookManager = new BookManager();
-
-            //bookManager.AddBook(new GenericCollections.Book("The Great Gatsby", "F. Scott Fitzgerald", "Novel", 1925));
-            //bookManager.AddBook(new GenericCollections.Book("1984", "George Orwell", "Dystopian", 1949));
-            //bookManager.AddBook(new GenericCollections.Book("To Kill a Mockingbird", "Harper Lee", "Fiction", 1960));
-
-            //Console.WriteLine("Books after addition:");
-            //bookManager.DisplayBooks();
-
-            //bookManager.InsertBookAtBeginning(new GenericCollections.Book("Brave New World", "Aldous Huxley", "Dystopian", 1932));
-            //bookManager.InsertBookAtEnd(new GenericCollections.Book("Moby-Dick", "Herman Melville", "Adventure", 1851));
-            //bookManager.InsertBookAtPosition(new GenericCollections.Book("War and Peace", "Leo Tolstoy", "Historical", 1869), 2);
-
-            //Console.WriteLine("\nBooks after insertions:");
-            //bookManager.DisplayBooks();
-
-            //Console.WriteLine("\nSearching for books with 'Dystopian':");
-            //var searchResults = bookManager.SearchBooks("Dystopian");
-            //foreach (var book in searchResults)
-            //{
-            //    Console.WriteLine(book);
-            //}
-
-            //bookManager.UpdateBook("1984", new GenericCollections.Book("Nineteen Eighty-Four", "George Orwell", "Dystopian", 1949));
-
-            //Console.WriteLine("\nBooks after update:");
-            //bookManager.DisplayBooks();
-
-            //bookManager.RemoveBook("Moby-Dick");
-
-            //bookManager.RemoveBookFromBeginning();
-            //bookManager.RemoveBookFromEnd();
-            //bookManager.RemoveBookAtPosition(1);
-
-            //Console.WriteLine("\nBooks after removals:");
-            //bookManager.DisplayBooks();
-            #endregion
-            #region Task13
-            //ClinicQueue clinicQueue = new ClinicQueue(3);
-
-            //clinicQueue.AddPatient("John Doe", 2);
-            //clinicQueue.AddPatient("Jane Smith", 4);
-            //clinicQueue.AddPatient("Alice Brown", 1);
-            //clinicQueue.AddPatient("Bob Johnson", 3);
-
-            //clinicQueue.DisplayQueue();
-
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    clinicQueue.ProcessPatient();
-            //}
-
-            //clinicQueue.DisplayQueue();
-            #endregion
-            #region Task14
-            GymManager gymManager = new GymManager();
-
-            gymManager.AddVisit("John Doe");
-            gymManager.AddVisit("Jane Smith");
-            gymManager.AddVisit("John Doe");
-
-            gymManager.ShowLastVisits("John Doe", 2);
-
-            gymManager.CancelLastVisit("John Doe");
-
-            DateTime startDate = DateTime.Now.AddMinutes(-5);
-            DateTime endDate = DateTime.Now;
-            gymManager.ShowVisitsInPeriod(startDate, endDate);
-            #endregion
+            if (count % 2 == 1)
+            {
+                return sortedList[mid];
+            }
+            else
+            {
+                if (typeof(T) == typeof(string))
+                {
+                    return sortedList[mid - 1];
+                }
+                else
+                {
+                    dynamic first = sortedList[mid - 1];
+                    dynamic second = sortedList[mid];
+                    return (first + second) / 2;
+                }
+            }
         }
     }
 }
