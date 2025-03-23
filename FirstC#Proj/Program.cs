@@ -8,128 +8,178 @@ namespace FirstC_Proj
 
     class Program
     {
-
-        static void Swap<T>(ref T a, ref T b) {
-            T temp = a;
-            a = b;
-            b = temp;
-        }
-
         static void Main()
         {
             #region Task1
-            //int num1 = 10;
-            //int num2 = 20;
-            //Swap(ref num1, ref num2);
-            //Console.WriteLine(num1);
-            //Console.WriteLine(num2);
-            //string str1 = "asdf";
-            //string str2 = "abc";
-            //Swap(ref str1, ref str2);
-            //Console.WriteLine(str1);
-            //Console.WriteLine(str2);
+            //Console.WriteLine("Enter path to file");
+            //string text = Console.ReadLine();
+
+            //if (!File.Exists(text))
+            //{
+            //    Console.WriteLine("File does not exist.");
+            //}
+            //else
+            //{
+            //    using (StreamReader reader = new StreamReader(text))
+            //    {
+            //        Console.WriteLine(reader.ReadToEnd());
+            //    }
+            //}
             #endregion
             #region Task2
-            //PriorityQueue<int> pq = new PriorityQueue<int>();
+            //int[] array = new int[0];
 
-            //pq.Enqueue(5);
-            //pq.Enqueue(2);
-            //pq.Enqueue(8);
-            //pq.Enqueue(1);
-
-            //Console.WriteLine("Priority Queue:");
-
-            //while (pq.Count > 0)
+            //while (true)
             //{
-            //    Console.WriteLine(pq.Dequeue());
+            //    Console.WriteLine("\n1. Enter array");
+            //    Console.WriteLine("2. Save array to file");
+            //    Console.WriteLine("3. Load array from file");
+            //    Console.WriteLine("4. Exit");
+            //    Console.Write("Choose: ");
+
+            //    string choice = Console.ReadLine();
+
+            //    switch (choice)
+            //    {
+            //        case "1":
+            //            array = InputArray();
+            //            break;
+            //        case "2":
+            //            SaveArrayToFile(array);
+            //            break;
+            //        case "3":
+            //            array = LoadArrayFromFile();
+            //            break;
+            //        case "4":
+            //            return;
+            //        default:
+            //            Console.WriteLine("Error");
+            //            break;
+            //    }
             //}
             #endregion
             #region Task3
-            //CircleQueue<int> cq = new CircleQueue<int>(4);
+            string evenFileName = "even_numbers.txt";
+            string oddFileName = "odd_numbers.txt";
+            Random random = new Random();
 
-            //cq.Enqueue(5);
-            //cq.Enqueue(2);
-            //cq.Enqueue(8);
-            //cq.Enqueue(1);
-
-            //Console.WriteLine("Circle Queue:");
-
-            //while (cq.Count > 0)
-            //{
-            //    Console.WriteLine(cq.Dequeue());
-            //}
-            #endregion
-            #region Task4
-            //SingleLinkedList<int> list = new SingleLinkedList<int>();
-
-            //list.Add(5);
-            //list.Add(2);
-            //list.Add(8);
-            //list.Add(1);
-            //list.PrintAll();
-            //list.Remove(5);
-            //list.PrintAll();
-            #endregion
-            #region Task5
-            //DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-
-            //list.Add(5);
-            //list.Add(2);
-            //list.Add(8);
-            //list.Add(1);
-            //list.PrintAll();
-            //list.Remove(2);
-            //list.PrintAll();
-            #endregion
-            #region Task6
-            List<int> numbersOdd = new List<int> { 5, 2, 9, 1, 6 };
-            Console.WriteLine($"Median of numbersOdd: {FindMedian(numbersOdd)}");
-
-            List<string> wordsOdd = new List<string> { "apple", "banana", "cherry", "date", "fig" };
-            Console.WriteLine($"Median of wordsOdd: {FindMedian(wordsOdd)}");
-
-            List<float> numbersEven = new List<float> { 4, 1, 7, 9, 3, 8 };
-            Console.WriteLine($"Median of numbersEven: {FindMedian(numbersEven)}");
-
-            List<string> wordsEven = new List<string> { "apple", "banana", "cherry", "date" };
-            Console.WriteLine($"Median of wordsEven: {FindMedian(wordsEven)}");
-
-            List<int> emptyList = new List<int>();
-            Console.WriteLine($"Median of empty list: {FindMedian(emptyList)}");
-            #endregion
-        }
-
-        static T FindMedian<T>(IList<T> collection) where T : IComparable<T>
-        {
-            if (collection == null || collection.Count == 0)
+            using (StreamWriter evenWriter = new StreamWriter(evenFileName))
+            using (StreamWriter oddWriter = new StreamWriter(oddFileName))
             {
-                Console.WriteLine("Collection cannot be empty");
-                return default;
+                for (int i = 0; i < 10000; i++)
+                {
+                    int number = random.Next(int.MinValue, int.MaxValue);
+                    if (number % 2 == 0)
+                    {
+                        evenWriter.WriteLine(number);
+                    }
+                    else
+                    {
+                        oddWriter.WriteLine(number);
+                    }
+                }
             }
 
-            List<T> sortedList = new List<T>(collection);
-            sortedList.Sort();
-
-            int count = sortedList.Count;
-            int mid = count / 2;
-
-            if (count % 2 == 1)
+            DisplayFileStatistics(evenFileName);
+            DisplayFileStatistics(oddFileName);
+            #endregion
+        }
+        static void DisplayFileStatistics(string fileName)
+        {
+            if (File.Exists(fileName))
             {
-                return sortedList[mid];
+                FileInfo fileInfo = new FileInfo(fileName);
+                Console.WriteLine($"\nStatistics for file: {fileInfo.Name}");
+                Console.WriteLine($"Path: {fileInfo.FullName}");
+                Console.WriteLine($"Size: {fileInfo.Length} bytes");
+                Console.WriteLine($"Creation Time: {fileInfo.CreationTime}");
+                Console.WriteLine($"Last Access Time: {fileInfo.LastAccessTime}");
+                Console.WriteLine($"Last Write Time: {fileInfo.LastWriteTime}");
             }
             else
             {
-                if (typeof(T) == typeof(string))
+                Console.WriteLine($"File {fileName} does not exist.");
+            }
+        }
+        static int[] InputArray()
+        {
+            Console.Write("Enter array size: ");
+            if (int.TryParse(Console.ReadLine(), out int size) && size > 0)
+            {
+                int[] array = new int[size];
+                for (int i = 0; i < size; i++)
                 {
-                    return sortedList[mid - 1];
+                    Console.Write($"Element {i + 1}: ");
+                    while (!int.TryParse(Console.ReadLine(), out array[i]))
+                    {
+                        Console.Write("Incorrect number, enter int: ");
+                    }
                 }
-                else
+                return array;
+            }
+            Console.WriteLine("Incorrect array size.");
+            return new int[0];
+        }
+
+        static void SaveArrayToFile(int[] array)
+        {
+            Console.Write("Enter name of file to save: ");
+            string filename = Console.ReadLine();
+
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                foreach (int num in array)
                 {
-                    dynamic first = sortedList[mid - 1];
-                    dynamic second = sortedList[mid];
-                    return (first + second) / 2;
+                    writer.Write(num);
+                    writer.Write(" ");
                 }
             }
+
+            Console.WriteLine("Array was saved.");
+        }
+
+        static int[] LoadArrayFromFile()
+        {
+            Console.Write("Enter name of file to load: ");
+            string filename = Console.ReadLine();
+
+            if (!File.Exists(filename))
+            {
+                Console.WriteLine("Error: file doesn't exist.");
+                return new int[0];
+            }
+
+            string content = File.ReadAllText(filename);
+            string[] parts = content.Split(' ');
+            int count = 0;
+
+            foreach (string part in parts)
+            {
+                if (part.Length > 0)
+                {
+                    count++;
+                }
+            }
+
+            int[] array = new int[count];
+            int index = 0;
+
+            foreach (string part in parts)
+            {
+                if (part.Length > 0 && int.TryParse(part, out int number))
+                {
+                    array[index++] = number;
+                }
+            }
+
+            Console.Write("Array loaded: ");
+            foreach (int num in array)
+            {
+                Console.Write(num + " ");
+            }
+            Console.WriteLine();
+
+            return array;
         }
     }
 }
