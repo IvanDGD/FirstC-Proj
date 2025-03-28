@@ -1,185 +1,186 @@
 ﻿using FirstC_Proj.GenericCollectionHW;
 using FirstC_Proj.GenericCollections;
+using FirstC_Proj.Lambda_Expressions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace FirstC_Proj
 {
 
     class Program
     {
-        static void Main()
+        delegate string GetColorRGB(string colorName);
+        static int CountMultiples(int[] arr, int divisor, DCountMultiples countFunc)
         {
-            #region Task1
-            //Console.WriteLine("Enter path to file");
-            //string text = Console.ReadLine();
-
-            //if (!File.Exists(text))
-            //{
-            //    Console.WriteLine("File does not exist.");
-            //}
-            //else
-            //{
-            //    using (StreamReader reader = new StreamReader(text))
-            //    {
-            //        Console.WriteLine(reader.ReadToEnd());
-            //    }
-            //}
-            #endregion
-            #region Task2
-            //int[] array = new int[0];
-
-            //while (true)
-            //{
-            //    Console.WriteLine("\n1. Enter array");
-            //    Console.WriteLine("2. Save array to file");
-            //    Console.WriteLine("3. Load array from file");
-            //    Console.WriteLine("4. Exit");
-            //    Console.Write("Choose: ");
-
-            //    string choice = Console.ReadLine();
-
-            //    switch (choice)
-            //    {
-            //        case "1":
-            //            array = InputArray();
-            //            break;
-            //        case "2":
-            //            SaveArrayToFile(array);
-            //            break;
-            //        case "3":
-            //            array = LoadArrayFromFile();
-            //            break;
-            //        case "4":
-            //            return;
-            //        default:
-            //            Console.WriteLine("Error");
-            //            break;
-            //    }
-            //}
-            #endregion
-            #region Task3
-            string evenFileName = "even_numbers.txt";
-            string oddFileName = "odd_numbers.txt";
-            Random random = new Random();
-
-            using (StreamWriter evenWriter = new StreamWriter(evenFileName))
-            using (StreamWriter oddWriter = new StreamWriter(oddFileName))
-            {
-                for (int i = 0; i < 10000; i++)
-                {
-                    int number = random.Next(int.MinValue, int.MaxValue);
-                    if (number % 2 == 0)
-                    {
-                        evenWriter.WriteLine(number);
-                    }
-                    else
-                    {
-                        oddWriter.WriteLine(number);
-                    }
-                }
-            }
-
-            DisplayFileStatistics(evenFileName);
-            DisplayFileStatistics(oddFileName);
-            #endregion
+            return countFunc(arr, divisor);
         }
-        static void DisplayFileStatistics(string fileName)
+        
+        delegate int DCountMultiples(int[] arr, int divisor);
+
+        static int CountInRange(int[] arr, int min, int max)
         {
-            if (File.Exists(fileName))
-            {
-                FileInfo fileInfo = new FileInfo(fileName);
-                Console.WriteLine($"\nStatistics for file: {fileInfo.Name}");
-                Console.WriteLine($"Path: {fileInfo.FullName}");
-                Console.WriteLine($"Size: {fileInfo.Length} bytes");
-                Console.WriteLine($"Creation Time: {fileInfo.CreationTime}");
-                Console.WriteLine($"Last Access Time: {fileInfo.LastAccessTime}");
-                Console.WriteLine($"Last Write Time: {fileInfo.LastWriteTime}");
-            }
-            else
-            {
-                Console.WriteLine($"File {fileName} does not exist.");
-            }
-        }
-        static int[] InputArray()
-        {
-            Console.Write("Enter array size: ");
-            if (int.TryParse(Console.ReadLine(), out int size) && size > 0)
-            {
-                int[] array = new int[size];
-                for (int i = 0; i < size; i++)
-                {
-                    Console.Write($"Element {i + 1}: ");
-                    while (!int.TryParse(Console.ReadLine(), out array[i]))
-                    {
-                        Console.Write("Incorrect number, enter int: ");
-                    }
-                }
-                return array;
-            }
-            Console.WriteLine("Incorrect array size.");
-            return new int[0];
-        }
-
-        static void SaveArrayToFile(int[] array)
-        {
-            Console.Write("Enter name of file to save: ");
-            string filename = Console.ReadLine();
-
-            using (StreamWriter writer = new StreamWriter(filename))
-            {
-                foreach (int num in array)
-                {
-                    writer.Write(num);
-                    writer.Write(" ");
-                }
-            }
-
-            Console.WriteLine("Array was saved.");
-        }
-
-        static int[] LoadArrayFromFile()
-        {
-            Console.Write("Enter name of file to load: ");
-            string filename = Console.ReadLine();
-
-            if (!File.Exists(filename))
-            {
-                Console.WriteLine("Error: file doesn't exist.");
-                return new int[0];
-            }
-
-            string content = File.ReadAllText(filename);
-            string[] parts = content.Split(' ');
             int count = 0;
-
-            foreach (string part in parts)
+            foreach (int num in arr)
             {
-                if (part.Length > 0)
+                if (num >= min && num <= max)
                 {
                     count++;
                 }
             }
+            return count;
+        }
 
-            int[] array = new int[count];
-            int index = 0;
+        static void DisplayUniqueNegatives(int[] arr)
+        {
+            int[] uniqueNegatives = new int[arr.Length];
+            int[] counts = new int[arr.Length];
+            int uniqueCount = 0;
 
-            foreach (string part in parts)
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (part.Length > 0 && int.TryParse(part, out int number))
+                if (arr[i] < 0)
                 {
-                    array[index++] = number;
+                    bool isDuplicate = false;
+                    for (int j = 0; j < uniqueCount; j++)
+                    {
+                        if (arr[i] == uniqueNegatives[j])
+                        {
+                            counts[j]++;
+                            isDuplicate = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDuplicate)
+                    {
+                        uniqueNegatives[uniqueCount] = arr[i];
+                        counts[uniqueCount] = 1;
+                        uniqueCount++;
+                    }
                 }
             }
 
-            Console.Write("Array loaded: ");
-            foreach (int num in array)
+            for (int i = 0; i < uniqueCount; i++)
             {
-                Console.Write(num + " ");
+                if (counts[i] == 1)
+                {
+                    Console.Write($"{uniqueNegatives[i]} ");
+                }
             }
-            Console.WriteLine();
+            Console.WriteLine("");
+        }
 
-            return array;
+        static void Main()
+        {
+            #region Task1
+            //GetColorRGB getRainbowColorRGB = delegate (string colorName)
+            //{
+            //    Color color = Color.FromName(colorName);
+            //    if (color.IsKnownColor)
+            //    {
+            //        return $"{color.R},{color.G},{color.B}";
+            //    }
+            //    else
+            //    {
+            //        return "Incorrect color";
+            //    }
+            //};
+
+            //string[] rainbowColors = { "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet" };
+
+            //foreach (string color in rainbowColors)
+            //{
+            //    Console.WriteLine($"{color}: {getRainbowColorRGB(color)}");
+            //}
+            #endregion
+            #region Task2
+            //Backpack myBackpack = new Backpack("Black", "Nike", "Polyester", 1.5, 20, 10);
+
+            //myBackpack.ItemAdded += delegate (string item)
+            //{
+            //    Console.WriteLine($"Item added: {item}");
+            //};
+
+            //myBackpack.ItemRemoved += delegate (string item)
+            //{
+            //    Console.WriteLine($"Item removed: {item}");
+            //};
+
+            //myBackpack.CharacteristicsChanged += delegate (string message)
+            //{
+            //    Console.WriteLine(message);
+            //};
+
+            //try
+            //{
+            //    myBackpack.AddItem("Laptop", 5);
+            //    myBackpack.AddItem("Water Bottle", 2);
+            //    myBackpack.RemoveItem("Laptop", 5);
+            //    myBackpack.ChangeCharacteristics("Red", "Adidas", "Nylon", 1.2, 25);
+            //    myBackpack.AddItem("Tent", 30);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error: {ex.Message}");
+            //}
+            #endregion
+            #region Task3
+            //int[] numbers = { 7, 14, 21, 28, 35, 42, 49, 50, 63, 70, 77, 84, 91, 100 };
+
+            //DCountMultiples countMultiples = (arr, divisor) =>
+            //{
+            //    int count = 0;
+            //    foreach (int num in arr)
+            //    {
+            //        if (num % divisor == 0)
+            //            count++;
+            //    }
+            //    return count;
+            //};
+
+            //Console.WriteLine("Count of numbers divisible by 7: " + CountMultiples(numbers, 7, countMultiples));
+
+            //Console.WriteLine("Count of numbers divisible by 5: " + CountMultiples(numbers, 5, countMultiples));
+            //Console.WriteLine("Count of numbers divisible by 3: " + CountMultiples(numbers, 3, countMultiples));
+            #endregion
+            #region Task4
+            //int[] numbers = { 3, 7, 15, 22, 30, 42, 50, 63, 77, 91 };
+
+            //Console.WriteLine(CountInRange(numbers, 10, 50));
+            //Console.WriteLine(CountInRange(numbers, 20, 80));
+            //Console.WriteLine(CountInRange(numbers, 1, 100));
+            #endregion
+            #region Task5
+            //int[] numbers = { -1, -2, -2, -3, -1, -4, -5, -5, 0, 1, 2, -6 };
+
+            //DisplayUniqueNegatives(numbers);
+            #endregion
+            #region Task6
+            //string text = "This is a test. This test is only a test.";
+            //string wordToFind = "test";
+
+            //int countOccurrences(string inputText, string word)
+            //{
+            //    int count = 0;
+            //    int index = 0;
+
+            //    while ((index = inputText.IndexOf(word, index, StringComparison.OrdinalIgnoreCase)) != -1)
+            //    {
+            //        count++;
+            //        index += word.Length;
+            //    }
+
+            //    return count;
+            //}
+
+            //int occurrences = countOccurrences(text, wordToFind);
+            //Console.WriteLine($"The word '{wordToFind}' occurs {occurrences} times in the text:\n{text}");
+            #endregion
+            #region Task7
+            ATM atm = new ATM();
+            atm.Start();
+            #endregion
         }
     }
 }
