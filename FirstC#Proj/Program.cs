@@ -4,182 +4,261 @@ using FirstC_Proj.Lambda_Expressions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using FirstC_Proj.LINQ;
 
 namespace FirstC_Proj
 {
 
     class Program
     {
-        delegate string GetColorRGB(string colorName);
-        static int CountMultiples(int[] arr, int divisor, DCountMultiples countFunc)
-        {
-            return countFunc(arr, divisor);
-        }
-        
-        delegate int DCountMultiples(int[] arr, int divisor);
-
-        static int CountInRange(int[] arr, int min, int max)
-        {
-            int count = 0;
-            foreach (int num in arr)
-            {
-                if (num >= min && num <= max)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        static void DisplayUniqueNegatives(int[] arr)
-        {
-            int[] uniqueNegatives = new int[arr.Length];
-            int[] counts = new int[arr.Length];
-            int uniqueCount = 0;
-
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] < 0)
-                {
-                    bool isDuplicate = false;
-                    for (int j = 0; j < uniqueCount; j++)
-                    {
-                        if (arr[i] == uniqueNegatives[j])
-                        {
-                            counts[j]++;
-                            isDuplicate = true;
-                            break;
-                        }
-                    }
-
-                    if (!isDuplicate)
-                    {
-                        uniqueNegatives[uniqueCount] = arr[i];
-                        counts[uniqueCount] = 1;
-                        uniqueCount++;
-                    }
-                }
-            }
-
-            for (int i = 0; i < uniqueCount; i++)
-            {
-                if (counts[i] == 1)
-                {
-                    Console.Write($"{uniqueNegatives[i]} ");
-                }
-            }
-            Console.WriteLine("");
-        }
 
         static void Main()
         {
             #region Task1
-            //GetColorRGB getRainbowColorRGB = delegate (string colorName)
-            //{
-            //    Color color = Color.FromName(colorName);
-            //    if (color.IsKnownColor)
-            //    {
-            //        return $"{color.R},{color.G},{color.B}";
-            //    }
-            //    else
-            //    {
-            //        return "Incorrect color";
-            //    }
-            //};
+            //int[] ints = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
-            //string[] rainbowColors = { "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet" };
+            //Console.Write("Enter num: ");
+            //int num1 = int.Parse(Console.ReadLine());
 
-            //foreach (string color in rainbowColors)
+            //Console.Write("Enter start range: ");
+            //int startRange = int.Parse(Console.ReadLine());
+            //Console.Write("Enter end range: ");
+            //int endRange = int.Parse(Console.ReadLine());
+
+            //var fullArrInts =
+            //    from i in ints
+            //    select i;
+
+            //var doublesInArr =
+            //    from d in ints
+            //    where d % 2 == 0
+            //    select d;
+
+            //var oddInArr =
+            //    from o in ints
+            //    where o % 2 != 0
+            //    select o;
+
+            //var biggerNum =
+            //    from biggerInt in ints
+            //    where biggerInt > num1
+            //    select biggerInt;
+
+            //List<int> numbersInRange = new List<int>();
+
+            //foreach (int number in ints)
             //{
-            //    Console.WriteLine($"{color}: {getRainbowColorRGB(color)}");
+            //    if (number >= startRange && number <= endRange)
+            //    {
+            //        numbersInRange.Add(number);
+            //    }
             //}
+
+            //var numbersMultiplesSeven =
+            //    from multipleNum in ints
+            //    where multipleNum % 7 == 0
+            //    orderby multipleNum
+            //    select multipleNum;
+
+            //var numbersMultiplesEight =
+            //    from multipleNum in ints
+            //    where multipleNum % 8 == 0
+            //    orderby multipleNum descending
+            //    select multipleNum;
+
+            //Console.WriteLine("Full array");
+            //foreach (var item in fullArrInts)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Doubles in array");
+            //foreach (var item in doublesInArr)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Odd in array");
+            //foreach (var item in oddInArr)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Numbers bigger then num");
+            //foreach (var item in biggerNum)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Numbers in your range");
+            //foreach (var item in numbersInRange)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Multiples of seven");
+            //foreach (var item in numbersMultiplesSeven)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Multiples of eight");
+            //foreach (var item in numbersMultiplesEight)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
             #endregion
             #region Task2
-            //Backpack myBackpack = new Backpack("Black", "Nike", "Polyester", 1.5, 20, 10);
+            //string[] cities = { "New York", "Amsterdam", "Oslo", "Berlin", "Newark", "Athens", "Nice", "Naples", "Nuremberg" };
 
-            //myBackpack.ItemAdded += delegate (string item)
+            //Console.WriteLine("All cities:");
+            //foreach (string city in cities)
             //{
-            //    Console.WriteLine($"Item added: {item}");
-            //};
-
-            //myBackpack.ItemRemoved += delegate (string item)
-            //{
-            //    Console.WriteLine($"Item removed: {item}");
-            //};
-
-            //myBackpack.CharacteristicsChanged += delegate (string message)
-            //{
-            //    Console.WriteLine(message);
-            //};
-
-            //try
-            //{
-            //    myBackpack.AddItem("Laptop", 5);
-            //    myBackpack.AddItem("Water Bottle", 2);
-            //    myBackpack.RemoveItem("Laptop", 5);
-            //    myBackpack.ChangeCharacteristics("Red", "Adidas", "Nylon", 1.2, 25);
-            //    myBackpack.AddItem("Tent", 30);
+            //    Console.WriteLine(city);
             //}
-            //catch (Exception ex)
+            //Console.WriteLine("\nCities with a specified length (6):");
+
+            //var citiesLength = cities.Where(city => city.Length == 6);
+
+            //foreach (string city in citiesLength)
             //{
-            //    Console.WriteLine($"Error: {ex.Message}");
+            //    Console.WriteLine(city);
+            //}
+            //var startWithA = cities.Where(city => city.StartsWith("A"));
+            //Console.WriteLine("\nCities starting with 'A':");
+            //foreach (string city in startWithA)
+            //{
+            //    Console.WriteLine(city);
+            //}
+            //var endWithM = cities.Where(city => city.EndsWith("m"));
+            //Console.WriteLine("\nCities ending with 'M':");
+            //foreach (string city in endWithM)
+            //{
+            //    Console.WriteLine(city);
+            //}
+            //var startWithNEndWithK = cities.Where(city => city.StartsWith("N") && city.EndsWith("k"));
+            //Console.WriteLine("\nCities starting with 'N' and ending with 'K':");
+            //foreach (string city in startWithNEndWithK)
+            //{
+            //    Console.WriteLine(city);
+            //}
+
+            //var startWithNe = cities.Where(city => city.StartsWith("Ne")).ToArray();
+            //Console.WriteLine("\nCities starting with 'Ne':");
+            //string[] filteredCities = startWithNe;
+
+            //for (int i = 0; i < filteredCities.Length - 1; i++)
+            //{
+            //    for (int j = i + 1; j < filteredCities.Length; j++)
+            //    {
+            //        if (string.Compare(filteredCities[i], filteredCities[j]) < 0)
+            //        {
+            //            string temp = filteredCities[i];
+            //            filteredCities[i] = filteredCities[j];
+            //            filteredCities[j] = temp;
+            //        }
+            //    }
+            //}
+
+            //foreach (string city in filteredCities)
+            //{
+            //    Console.WriteLine(city);
             //}
             #endregion
             #region Task3
-            //int[] numbers = { 7, 14, 21, 28, 35, 42, 49, 50, 63, 70, 77, 84, 91, 100 };
-
-            //DCountMultiples countMultiples = (arr, divisor) =>
+            //Student[] students =
             //{
-            //    int count = 0;
-            //    foreach (int num in arr)
-            //    {
-            //        if (num % divisor == 0)
-            //            count++;
-            //    }
-            //    return count;
+            //    new Student("Boris", "Ivanov", 20, "Harvard"),
+            //    new Student("Alice", "Brown", 22, "MIT"),
+            //    new Student("Boris", "Petrov", 18, "Oxford"),
+            //    new Student("John", "Brooks", 21, "Stanford"),
+            //    new Student("Emily", "Bronson", 19, "Cambridge"),
+            //    new Student("Michael", "Smith", 25, "Oxford"),
+            //    new Student("Sarah", "Brody", 23, "MIT")
             //};
 
-            //Console.WriteLine("Count of numbers divisible by 7: " + CountMultiples(numbers, 7, countMultiples));
-
-            //Console.WriteLine("Count of numbers divisible by 5: " + CountMultiples(numbers, 5, countMultiples));
-            //Console.WriteLine("Count of numbers divisible by 3: " + CountMultiples(numbers, 3, countMultiples));
-            #endregion
-            #region Task4
-            //int[] numbers = { 3, 7, 15, 22, 30, 42, 50, 63, 77, 91 };
-
-            //Console.WriteLine(CountInRange(numbers, 10, 50));
-            //Console.WriteLine(CountInRange(numbers, 20, 80));
-            //Console.WriteLine(CountInRange(numbers, 1, 100));
-            #endregion
-            #region Task5
-            //int[] numbers = { -1, -2, -2, -3, -1, -4, -5, -5, 0, 1, 2, -6 };
-
-            //DisplayUniqueNegatives(numbers);
-            #endregion
-            #region Task6
-            //string text = "This is a test. This test is only a test.";
-            //string wordToFind = "test";
-
-            //int countOccurrences(string inputText, string word)
+            //Console.WriteLine("All students:");
+            //foreach (Student student in students)
             //{
-            //    int count = 0;
-            //    int index = 0;
+            //    Console.WriteLine(student);
+            //}
+            //var nameBoris = students.Where(student => student.FirstName == "Boris");
+            //Console.WriteLine("\nStudents named Boris:");
+            //foreach (Student student in nameBoris)
+            //{
+            //    Console.WriteLine(student);
+            //}
+            //var lastNameStartWithBro = students.Where(student => student.LastName.StartsWith("Bro"));
+            //Console.WriteLine("\nStudents with last name starting with 'Bro':");
+            //foreach (Student student in lastNameStartWithBro)
+            //{
+            //    Console.WriteLine(student);
+            //}
+            //var olderThan19 = students.Where(student => student.Age > 19);
+            //Console.WriteLine("\nStudents older than 19:");
+            //foreach (Student student in olderThan19)
+            //{
+            //    Console.WriteLine(student);
+            //}
+            //var olderThan20YoungerThan23 = students.Where(student => student.Age > 20 && student.Age < 23);
+            //Console.WriteLine("\nStudents older than 20 and younger than 23:");
+            //foreach (Student student in olderThan20YoungerThan23)
+            //{
+            //    Console.WriteLine(student);
+            //}
+            //var studyingAtMIT = students.Where(student => student.University == "MIT");
+            //Console.WriteLine("\nStudents studying at MIT:");
+            //foreach (Student student in studyingAtMIT)
+            //{
+            //    Console.WriteLine(student);
+            //}
+            //var studyingAtOxfordOlderThan18 = students.Where(student => student.University == "Oxford" && student.Age > 18).ToArray();
+            //Console.WriteLine("\nStudents studying at Oxford and older than 18:");
+            //Student[] filteredStudents = studyingAtOxfordOlderThan18;
 
-            //    while ((index = inputText.IndexOf(word, index, StringComparison.OrdinalIgnoreCase)) != -1)
+            //for (int i = 0; i < filteredStudents.Length - 1; i++)
+            //{
+            //    for (int j = i + 1; j < filteredStudents.Length; j++)
             //    {
-            //        count++;
-            //        index += word.Length;
+            //        if (filteredStudents[i].Age < filteredStudents[j].Age)
+            //        {
+            //            Student temp = filteredStudents[i];
+            //            filteredStudents[i] = filteredStudents[j];
+            //            filteredStudents[j] = temp;
+            //        }
             //    }
-
-            //    return count;
             //}
 
-            //int occurrences = countOccurrences(text, wordToFind);
-            //Console.WriteLine($"The word '{wordToFind}' occurs {occurrences} times in the text:\n{text}");
+            //foreach (Student student in filteredStudents)
+            //{
+            //    Console.WriteLine(student);
+            //}
             #endregion
-            #region Task7
-            ATM atm = new ATM();
-            atm.Start();
+            #region Task4
+            string[] words = { "apple", "banana", "kiwi", "strawberry", "grape", "blueberry" };
+
+            Console.WriteLine("Sorting by length");
+            var sortedWord =
+                from word in words
+                orderby word.Length
+                select word;
+            foreach (string word in sortedWord)
+            {
+                Console.WriteLine(word);
+            }
+
+            Console.WriteLine("\nSorting by length descending");
+            var sortedWordDescending =
+                from word in words
+                orderby word.Length descending
+                select word;
+            foreach (string word in sortedWordDescending)
+            {
+                Console.WriteLine(word);
+            }
             #endregion
         }
     }
