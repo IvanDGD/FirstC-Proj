@@ -93,12 +93,12 @@ namespace FirstC_Proj
            return !(a == b);
        }
 
-       public override bool Equals(object obj)
-       {
-           return obj is Fraction fraction && this == fraction;
-       }
+        public override bool Equals(object? obj)
+        {
+            return obj is Fraction fraction && this == fraction;
+        }
 
-       public override int GetHashCode()
+        public override int GetHashCode()
        {
            return HashCode.Combine(Numerator, Denominator);
        }

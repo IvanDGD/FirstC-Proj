@@ -22,10 +22,26 @@ namespace FirstC_Proj
             _arr = new int[rows, cols];
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return this.ToString() == obj.ToString();
+            return obj != null && this.ToString() == obj.ToString();
         }
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            hash = hash * 31 + Rows;
+            hash = hash * 31 + Cols;
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Cols; j++)
+                {
+                    hash = hash * 31 + _arr[i, j];
+                }
+            }
+            return hash;
+        }
+
 
         public static Matrix operator +(Matrix matrix1, Matrix matrix2)
         {

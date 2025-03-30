@@ -17,10 +17,11 @@ namespace FirstC_Proj
         {
             Population = populationo;
         }
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return this.ToString() == obj.ToString();
+            return obj != null && this.ToString() == obj.ToString();
         }
+
         public override int GetHashCode()
         {
             return this.ToString().GetHashCode();

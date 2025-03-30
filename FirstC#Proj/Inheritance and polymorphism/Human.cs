@@ -30,13 +30,12 @@ namespace FirstC_Proj
             _name = name;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"Name: {Name}");
+            sb.Append($"Name: {Name} ");
             sb.Append($"Age: {Age}");
             return sb.ToString();
         }
-
     }
 }

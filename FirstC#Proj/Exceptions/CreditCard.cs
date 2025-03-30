@@ -82,7 +82,7 @@ namespace FirstC_Proj.Exceptions
             Balance = balance;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is CreditCard other)
             {
