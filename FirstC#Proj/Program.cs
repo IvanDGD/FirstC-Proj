@@ -68,38 +68,74 @@ namespace FirstC_Proj
             //} while (!isExit);
             #endregion
             #region Task 2, Task 3 
-            MusicalAlbum album = new MusicalAlbum();
-            bool isExit = false;
+            //MusicalAlbum album = new MusicalAlbum();
+            //bool isExit = false;
 
+            //do
+            //{
+            //    Console.WriteLine("Menu:");
+            //    Console.WriteLine("1. Enter album information");
+            //    Console.WriteLine("2. Display album information");
+            //    Console.WriteLine("3. Serialize album");
+            //    Console.WriteLine("4. Save serialized album to file");
+            //    Console.WriteLine("5. Load serialized album from file");
+            //    Console.WriteLine("6. Exit");
+            //    string choice = Console.ReadLine();
+
+            //    switch (choice)
+            //    {
+            //        case "1":
+            //            album.InputAlbum();
+            //            break;
+            //        case "2":
+            //            album.DisplayAlbum();
+            //            break;
+            //        case "3":
+            //            album.SerializeAlbum();
+            //            break;
+            //        case "4":
+            //            album.SaveAlbumToFile();
+            //            break;
+            //        case "5":
+            //            album.LoadAlbumFromFile();
+            //            break;
+            //        case "6":
+            //            isExit = true;
+            //            break;
+            //        default:
+            //            Console.WriteLine("Incorrect input.");
+            //            break;
+            //    }
+            //} while (!isExit);
+            #endregion
+            #region Task 4
+            List<MusicalAlbum> albums = new List<MusicalAlbum>();
+            bool isExit = false;
             do
             {
                 Console.WriteLine("Menu:");
                 Console.WriteLine("1. Enter album information");
                 Console.WriteLine("2. Display album information");
-                Console.WriteLine("3. Serialize album");
-                Console.WriteLine("4. Save serialized album to file");
-                Console.WriteLine("5. Load serialized album from file");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("3. Save album to file");
+                Console.WriteLine("4. Load albums from file");
+                Console.WriteLine("5. Exit");
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        album.InputAlbum();
+                        InputAlbum(albums);
                         break;
                     case "2":
-                        album.DisplayAlbum();
+                        DisplayAlbums(albums);
                         break;
                     case "3":
-                        album.SerializeAlbum();
+                        SaveAlbumsToFile(albums);
                         break;
                     case "4":
-                        album.SaveAlbumToFile();
+                        LoadAlbumsFromFile(albums);
                         break;
                     case "5":
-                        album.LoadAlbumFromFile();
-                        break;
-                    case "6":
                         isExit = true;
                         break;
                     default:
@@ -108,10 +144,42 @@ namespace FirstC_Proj
                 }
             } while (!isExit);
             #endregion
-            #region Task 4
-            #endregion
+        }
+        private static void InputAlbum(List<MusicalAlbum> albums)
+        {
+            MusicalAlbum album = new MusicalAlbum();
+            album.InputAlbum();
+            albums.Add(album);
         }
 
+        private static void DisplayAlbums(List<MusicalAlbum> albums)
+        {
+            Console.WriteLine("Albums Information:");
+            foreach (var album in albums)
+            {
+                album.DisplayAlbum();
+            }
+        }
+
+        private static void SaveAlbumsToFile(List<MusicalAlbum> albums)
+        {
+            string filePath = "albums.json";
+            string jsonString = JsonSerializer.Serialize(albums);
+            File.WriteAllText(filePath, jsonString);
+            Console.WriteLine($"Serialized albums saved to {filePath}");
+        }
+
+        private static void LoadAlbumsFromFile(List<MusicalAlbum> albums)
+        {
+            string filePath = "albums.json";
+            var loadedAlbums = MusicalAlbum.LoadAlbumsFromFile(filePath);
+            if (loadedAlbums != null)
+            {
+                albums = loadedAlbums;
+                Console.WriteLine("Albums loaded from file:");
+                DisplayAlbums(albums);
+            }
+        }
         static void InputArr(int[] arr, int size)
         {
             for (int i = 0; i < size; i++)

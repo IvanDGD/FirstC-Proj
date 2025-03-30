@@ -17,15 +17,7 @@ namespace FirstC_Proj.Serialize
         {
             Songs = new List<Song>();
         }
-        public MusicalAlbum(string title, string artist, int releaseYear, double duration, string recordLabel, List<Song> songs)
-        {
-            Title = title;
-            Artist = artist;
-            ReleaseYear = releaseYear;
-            Songs = songs;
-            Duration = duration;
-            RecordLabel = recordLabel;
-        }
+
         public void InputAlbum()
         {
             Console.Write("Enter album title: ");
@@ -50,6 +42,7 @@ namespace FirstC_Proj.Serialize
                 Songs.Add(song);
             }
         }
+
         private Song InputSong()
         {
             Console.Write("Enter song title: ");
@@ -63,6 +56,7 @@ namespace FirstC_Proj.Serialize
 
             return new Song(title, duration, genre);
         }
+
         public void DisplayAlbum()
         {
             Console.WriteLine("Album Information:");
@@ -76,27 +70,25 @@ namespace FirstC_Proj.Serialize
                 Console.WriteLine($" - Title: {song.Title}, Duration: {song.Duration} minutes, Genre: {song.Genre}");
             }
         }
+
         public string SerializeAlbum()
         {
             return JsonSerializer.Serialize(this);
         }
-        public void SaveAlbumToFile()
+
+        public void SaveAlbumToFile(string filePath)
         {
-            string filePath = "album.json";
             string jsonString = SerializeAlbum();
             File.WriteAllText(filePath, jsonString);
             Console.WriteLine($"Serialized album saved to {filePath}");
         }
-        public MusicalAlbum LoadAlbumFromFile()
+
+        public static List<MusicalAlbum> LoadAlbumsFromFile(string filePath)
         {
-            string filePath = "album.json";
             if (File.Exists(filePath))
             {
                 string jsonString = File.ReadAllText(filePath);
-                MusicalAlbum album = JsonSerializer.Deserialize<MusicalAlbum>(jsonString);
-                Console.WriteLine("Album loaded from file:");
-                album.DisplayAlbum();
-                return album;
+                return JsonSerializer.Deserialize<List<MusicalAlbum>>(jsonString);
             }
             else
             {
