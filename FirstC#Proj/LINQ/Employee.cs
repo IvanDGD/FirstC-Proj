@@ -12,7 +12,7 @@ namespace FirstC_Proj.LINQ
         public string Position;
         public string PhoneNumber;
         public string Email;
-        public decimal Salary;
+        public int Salary;
 
         public void PrintInfo()
         {

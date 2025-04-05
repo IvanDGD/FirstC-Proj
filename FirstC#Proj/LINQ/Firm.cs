@@ -12,8 +12,9 @@ namespace FirstC_Proj.LINQ
         public DateTime FoundationDate;
         public string BusinessProfile;
         public string DirectorFullName;
-        public int EmployeeCount;
+        public int EmployeeCount => Employees.Count;
         public string Address;
+        public List<Employee> Employees = new List<Employee>();
 
         public void PrintInfo()
         {
@@ -23,6 +24,8 @@ namespace FirstC_Proj.LINQ
             Console.WriteLine("Директор: " + DirectorFullName);
             Console.WriteLine("Кількість співробітників: " + EmployeeCount);
             Console.WriteLine("Адреса: " + Address);
+            Console.WriteLine("Співробітники:");
+            Employees.ForEach(e => Console.WriteLine(" - " + e.FullName));
             Console.WriteLine();
         }
     }
