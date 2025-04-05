@@ -1,277 +1,105 @@
 ﻿
 using System.Text.Json;
+using FirstC_Proj.LINQ;
 using FirstC_Proj.Serialize;
 
 namespace FirstC_Proj
 {
     class Program
     {
+        public static void PrintFirms(Firm[] firms, string title, Func<Firm, bool> condition)
+        {
+            Console.WriteLine(title);
+            foreach (Firm f in firms)
+                if (condition(f)) f.PrintInfo();
+        }
         static void Main(string[] args)
         {
-            #region Task 1
-            //int size = 10;
-            //int[] arr = new int[size];
-            //bool isExit = false;
-            //string choice2;
-
-            //do
+            #region Task1
+            //Firm[] firms = new Firm[]
             //{
-            //    Console.WriteLine("Menu:");
-            //    Console.WriteLine("1. Enter an array of integers from the keyboard");
-            //    Console.WriteLine("2. Filter numbers");
-            //    Console.WriteLine("3. Serialize array");
-            //    Console.WriteLine("4. Save serialized array to a file");
-            //    Console.WriteLine("5. Load serialized array from a file");
-            //    Console.WriteLine("6. Exit");
-            //    string choice = Console.ReadLine();
+            //new Firm { Name = "WhiteFood", FoundationDate = DateTime.Now.AddYears(-3), BusinessProfile = "Food", DirectorFullName = "John White", EmployeeCount = 250, Address = "London" },
+            //new Firm { Name = "Black&White", FoundationDate = DateTime.Now.AddDays(-123), BusinessProfile = "IT", DirectorFullName = "Steve Black", EmployeeCount = 50, Address = "Manchester" },
+            //new Firm { Name = "MarketCorp", FoundationDate = DateTime.Now.AddYears(-1), BusinessProfile = "Marketing", DirectorFullName = "Anna Brown", EmployeeCount = 120, Address = "London" },
+            //new Firm { Name = "TechWave", FoundationDate = DateTime.Now.AddYears(-5), BusinessProfile = "IT", DirectorFullName = "Alice White", EmployeeCount = 320, Address = "Birmingham" }
+            //};
 
-            //    switch (choice)
-            //    {
-            //        case "1":
-            //            InputArr(arr, size);
-            //            break;
-            //        case "2":
-            //            Console.WriteLine("Filter by:");
-            //            Console.WriteLine("1. Delete prime numbers");
-            //            Console.WriteLine("2. Delete Fibonacci numbers");
-            //            choice2 = Console.ReadLine();
+            //PrintFirms(firms, "Всі фірми:", f => true);
 
-            //            switch (choice2)
-            //            {
-            //                case "1":
-            //                    arr = DeletePrime(arr);
-            //                    break;
-            //                case "2":
-            //                    arr = DeleteFibonacci(arr);
-            //                    break;
-            //                default:
-            //                    Console.WriteLine("Incorrect input.");
-            //                    break;
-            //            }
-            //            break;
-            //        case "3":
-            //            SerializeArr(arr);
-            //            break;
-            //        case "4":
-            //            SaveArrToFile(arr);
-            //            break;
-            //        case "5":
-            //            arr = LoadArrFromFile();
-            //            break;
-            //        case "6":
-            //            isExit = true;
-            //            break;
-            //        default:
-            //            Console.WriteLine("Incorrect input.");
-            //            break;
-            //    }
-            //} while (!isExit);
-            #endregion
-            #region Task 2, Task 3 
-            //MusicalAlbum album = new MusicalAlbum();
-            //bool isExit = false;
+            //PrintFirms(firms, "Фірми з назвою, що містить 'Food':", f => f.Name.Contains("Food"));
 
-            //do
+            //PrintFirms(firms, "Фірми з профілем 'Marketing':", f => f.BusinessProfile == "Marketing");
+
+            //PrintFirms(firms, "Фірми з профілем 'Marketing' або 'IT':", f => f.BusinessProfile == "Marketing" || f.BusinessProfile == "IT");
+
+            //PrintFirms(firms, "Фірми з кількістю співробітників більше 100:", f => f.EmployeeCount > 100);
+
+            //PrintFirms(firms, "Фірми з кількістю співробітників від 100 до 300:", f => f.EmployeeCount >= 100 && f.EmployeeCount <= 300);
+
+            //PrintFirms(firms, "Фірми, які знаходяться в Лондоні:", f => f.Address == "London");
+
+            //PrintFirms(firms, "Фірми, у яких прізвище директора White:", f =>
             //{
-            //    Console.WriteLine("Menu:");
-            //    Console.WriteLine("1. Enter album information");
-            //    Console.WriteLine("2. Display album information");
-            //    Console.WriteLine("3. Serialize album");
-            //    Console.WriteLine("4. Save serialized album to file");
-            //    Console.WriteLine("5. Load serialized album from file");
-            //    Console.WriteLine("6. Exit");
-            //    string choice = Console.ReadLine();
+            //    string[] parts = f.DirectorFullName.Split(' ');
+            //    return parts[parts.Length - 1] == "White";
+            //});
 
-            //    switch (choice)
-            //    {
-            //        case "1":
-            //            album.InputAlbum();
-            //            break;
-            //        case "2":
-            //            album.DisplayAlbum();
-            //            break;
-            //        case "3":
-            //            album.SerializeAlbum();
-            //            break;
-            //        case "4":
-            //            album.SaveAlbumToFile();
-            //            break;
-            //        case "5":
-            //            album.LoadAlbumFromFile();
-            //            break;
-            //        case "6":
-            //            isExit = true;
-            //            break;
-            //        default:
-            //            Console.WriteLine("Incorrect input.");
-            //            break;
-            //    }
-            //} while (!isExit);
+            //PrintFirms(firms, "Фірми, які засновані більше двох років тому:", f => (DateTime.Now - f.FoundationDate).TotalDays > 365 * 2);
+
+            //PrintFirms(firms, "Фірми, з дня заснування яких минуло 123 дні:", f => (DateTime.Now - f.FoundationDate).Days == 123);
+
+            //PrintFirms(firms, "Фірми з прізвищем директора 'Black' та назвою, що містить 'White':", f =>
+            //{
+            //    string[] parts = f.DirectorFullName.Split(' ');
+            //    return parts[parts.Length - 1] == "Black" && f.Name.Contains("White");
+            //});
             #endregion
-            #region Task 4
-            List<MusicalAlbum> albums = new List<MusicalAlbum>();
-            bool isExit = false;
-            do
-            {
-                Console.WriteLine("Menu:");
-                Console.WriteLine("1. Enter album information");
-                Console.WriteLine("2. Display album information");
-                Console.WriteLine("3. Save album to file");
-                Console.WriteLine("4. Load albums from file");
-                Console.WriteLine("5. Exit");
-                string choice = Console.ReadLine();
+            #region Task2
+            //Firm[] firms = new Firm[]
+            //{
+            //    new Firm { Name = "WhiteFood", FoundationDate = DateTime.Now.AddYears(-3), BusinessProfile = "Food", DirectorFullName = "John White", EmployeeCount = 250, Address = "London" },
+            //    new Firm { Name = "Black&White", FoundationDate = DateTime.Now.AddDays(-123), BusinessProfile = "IT", DirectorFullName = "Steve Black", EmployeeCount = 50, Address = "Manchester" },
+            //    new Firm { Name = "MarketCorp", FoundationDate = DateTime.Now.AddYears(-1), BusinessProfile = "Marketing", DirectorFullName = "Anna Brown", EmployeeCount = 120, Address = "London" },
+            //    new Firm { Name = "TechWave", FoundationDate = DateTime.Now.AddYears(-5), BusinessProfile = "IT", DirectorFullName = "Alice White", EmployeeCount = 320, Address = "Birmingham" }
+            //};
 
-                switch (choice)
-                {
-                    case "1":
-                        InputAlbum(albums);
-                        break;
-                    case "2":
-                        DisplayAlbums(albums);
-                        break;
-                    case "3":
-                        SaveAlbumsToFile(albums);
-                        break;
-                    case "4":
-                        LoadAlbumsFromFile(albums);
-                        break;
-                    case "5":
-                        isExit = true;
-                        break;
-                    default:
-                        Console.WriteLine("Incorrect input.");
-                        break;
-                }
-            } while (!isExit);
+            //Console.WriteLine("Всі фірми:");
+            //firms.ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з назвою, що містить 'Food':");
+            //firms.Where(f => f.Name.Contains("Food")).ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з профілем 'Marketing':");
+            //firms.Where(f => f.BusinessProfile == "Marketing").ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з профілем 'Marketing' або 'IT':");
+            //firms.Where(f => f.BusinessProfile == "Marketing" || f.BusinessProfile == "IT").ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з кількістю співробітників більше 100:");
+            //firms.Where(f => f.EmployeeCount > 100).ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з кількістю співробітників від 100 до 300:");
+            //firms.Where(f => f.EmployeeCount >= 100 && f.EmployeeCount <= 300).ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми, які знаходяться в Лондоні:");
+            //firms.Where(f => f.Address == "London").ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми, у яких прізвище директора White:");
+            //firms.Where(f => f.DirectorFullName.Split(' ').Last() == "White").ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми, які засновані більше двох років тому:");
+            //firms.Where(f => (DateTime.Now - f.FoundationDate).TotalDays > 365 * 2).ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми, з дня заснування яких минуло 123 дні:");
+            //firms.Where(f => (DateTime.Now - f.FoundationDate).Days == 123).ToList().ForEach(f => f.PrintInfo());
+
+            //Console.WriteLine("Фірми з прізвищем директора 'Black' та назвою, що містить 'White':");
+            //firms.Where(f => f.DirectorFullName.Split(' ').Last() == "Black" && f.Name.Contains("White")).ToList().ForEach(f => f.PrintInfo());
             #endregion
-        }
-        private static void InputAlbum(List<MusicalAlbum> albums)
-        {
-            MusicalAlbum album = new MusicalAlbum();
-            album.InputAlbum();
-            albums.Add(album);
-        }
-
-        private static void DisplayAlbums(List<MusicalAlbum> albums)
-        {
-            Console.WriteLine("Albums Information:");
-            foreach (var album in albums)
-            {
-                album.DisplayAlbum();
-            }
-        }
-
-        private static void SaveAlbumsToFile(List<MusicalAlbum> albums)
-        {
-            string filePath = "albums.json";
-            string jsonString = JsonSerializer.Serialize(albums);
-            File.WriteAllText(filePath, jsonString);
-            Console.WriteLine($"Serialized albums saved to {filePath}");
-        }
-
-        private static void LoadAlbumsFromFile(List<MusicalAlbum> albums)
-        {
-            string filePath = "albums.json";
-            var loadedAlbums = MusicalAlbum.LoadAlbumsFromFile(filePath);
-            if (loadedAlbums != null)
-            {
-                albums = loadedAlbums;
-                Console.WriteLine("Albums loaded from file:");
-                DisplayAlbums(albums);
-            }
-        }
-        static void InputArr(int[] arr, int size)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                Console.Write($"Input number {i}: ");
-                arr[i] = int.Parse(Console.ReadLine());
-            }
-            Console.WriteLine();
-        }
-
-        static int[] DeletePrime(int[] arr)
-        {
-            List<int> filteredList = new List<int>();
-            foreach (int num in arr)
-            {
-                if (!IsPrime(num))
-                {
-                    filteredList.Add(num);
-                }
-            }
-            return filteredList.ToArray();
-        }
-
-        static int[] DeleteFibonacci(int[] arr)
-        {
-            List<int> filteredList = new List<int>();
-            foreach (int num in arr)
-            {
-                if (!IsFibonacci(num))
-                {
-                    filteredList.Add(num);
-                }
-            }
-            return filteredList.ToArray();
-        }
-
-        static void SerializeArr(int[] arr)
-        {
-            string jsonString = JsonSerializer.Serialize(arr);
-            Console.WriteLine("Serialized array: " + jsonString);
-        }
-
-        static void SaveArrToFile(int[] arr)
-        {
-            string filePath = "serializedArray.json";
-            string jsonString = JsonSerializer.Serialize(arr);
-            File.WriteAllText(filePath, jsonString);
-            Console.WriteLine($"Serialized array saved to {filePath}");
-        }
-
-        static int[] LoadArrFromFile()
-        {
-            string filePath = "serializedArray.json";
-            if (File.Exists(filePath))
-            {
-                string jsonString = File.ReadAllText(filePath);
-                int[] arr = JsonSerializer.Deserialize<int[]>(jsonString);
-                Console.WriteLine("Array loaded from file:");
-                foreach (int num in arr)
-                {
-                    Console.Write(num + " ");
-                }
-                Console.WriteLine();
-                return arr;
-            }
-            else
-            {
-                Console.WriteLine("File not found.");
-                return new int[0];
-            }
-        }
-
-        static bool IsPrime(int number)
-        {
-            if (number < 2) return false;
-            for (int i = 2; i <= Math.Sqrt(number); i++)
-            {
-                if (number % i == 0) return false;
-            }
-            return true;
-        }
-
-        static bool IsFibonacci(int number)
-        {
-            int a = 0, b = 1, temp;
-            while (b < number)
-            {
-                temp = a;
-                a = b;
-                b = temp + b;
-            }
-            return b == number || number == 0;
+            #region Task3
+            #endregion
+            #region Task4
+            #endregion
         }
     }
 }
