@@ -13,6 +13,7 @@ namespace FirstC_Proj.Serialize
         public string Publisher { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int PageCount { get; set; }
+        public List<Article> Articles { get; set; } = new List<Article>();
 
         public MagazineInfo() { }
 
@@ -26,10 +27,18 @@ namespace FirstC_Proj.Serialize
 
         public override string ToString()
         {
-            return "Назва: " + Title + "\n" +
-                   "Видавництво: " + Publisher + "\n" +
-                   "Дата випуску: " + ReleaseDate.ToShortDateString() + "\n" +
-                   "Кількість сторінок: " + PageCount;
+            string result = "Назва: " + Title + "\n" +
+                            "Видавництво: " + Publisher + "\n" +
+                            "Дата випуску: " + ReleaseDate.ToShortDateString() + "\n" +
+                            "Кількість сторінок: " + PageCount + "\n" +
+                            "Статті:\n";
+
+            for (int i = 0; i < Articles.Count; i++)
+            {
+                result += $"Стаття {i + 1}:\n{Articles[i]}\n";
+            }
+
+            return result;
         }
 
         public static MagazineInfo InputMagazine()
@@ -45,16 +54,35 @@ namespace FirstC_Proj.Serialize
             DateTime releaseDate = DateTime.Parse(dateInput);
 
             Console.Write("Кількість сторінок: ");
-            string pagesInput = Console.ReadLine();
-            int pageCount = Convert.ToInt32(pagesInput);
+            int pageCount = Convert.ToInt32(Console.ReadLine());
 
-            return new MagazineInfo(title, publisher, releaseDate, pageCount);
+            MagazineInfo magazine = new MagazineInfo(title, publisher, releaseDate, pageCount);
+
+            Console.Write("Скільки статей у журналі? ");
+            int articleCount = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < articleCount; i++)
+            {
+                Console.WriteLine($"\nСтаття {i + 1}");
+
+                Console.Write("  Назва статті: ");
+                string articleTitle = Console.ReadLine();
+
+                Console.Write("  Кількість символів: ");
+                int charCount = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("  Анонс статті: ");
+                string preview = Console.ReadLine();
+
+                magazine.Articles.Add(new Article(articleTitle, charCount, preview));
+            }
+
+            return magazine;
         }
 
         public static string SerializeMagazine(MagazineInfo magazine)
         {
-            JsonSerializerOptions options = new JsonSerializerOptions();
-            options.WriteIndented = true;
+            JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
             return JsonSerializer.Serialize(magazine, options);
         }
 
